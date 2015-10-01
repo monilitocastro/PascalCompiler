@@ -1,0 +1,27 @@
+
+
+
+
+
+
+
+
+
+
+
+
+This is the first delivery of the Pascal Compiler by MONILITO CASTRO.
+
+The compiler has a symbol table that indexes the type declarations of identfiers.
+This can be found near the bottom of every print out.
+The symbol contents that were printed there is given by toString() functions of HashTables and other data types.
+So the symbol table it might look messy, but all procedures, integers, char, and strings of any type of id is shown.
+
+
+I have type checking implemented as shown on bad.out's error message.
+It reveals what token index is the culprit and prints the two suspicious identifiers.
+
+The lexer also checks for illegal characters as shown on test.out.
+As shown by the same output file, the same identifier can have different variable types mapped to it.
+This provides flexibility to programmers at expense of readability.
+

@@ -65,6 +65,7 @@ public class Tokenizer2 {
 					}
 				}
 			}
+
 			if(biggestFound){
 				/**
 				*  Does:
@@ -84,6 +85,8 @@ public class Tokenizer2 {
 				}
 				TokenListElement elemToAdd = new TokenListElement(image, currBiggestPattern.token);
 				if(!currBiggestPattern.token.equals("<COMMENT>")){tokenList.add( elemToAdd );}
+				if(currBiggestPattern.token.equals("<ILLEGAL>")){postLexBuilder.append("ERROR: Illegal characters detected.\n");}
+
 				tokenIndex++;
 				//Symbol table
 				addToSymbolTable(image, currBiggestPattern.token, tokenIndex);

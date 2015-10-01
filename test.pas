@@ -5,7 +5,7 @@ Var a,b,c,ReadingWritingTest : Integer;
 Var ReadingWritingTest : String;
 Begin
  WriteLn("What is your name?");
- Read a;
+ Read a;&
  Write("Hello ");
  Write(a);
  WriteLn(". Prepare to learn PASCAL!!");

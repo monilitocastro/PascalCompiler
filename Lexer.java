@@ -97,6 +97,7 @@ public class Lexer {
 		tokenizer.addPattern("'[^']{1}'", "<LITCHAR>");
 		tokenizer.addPattern("/0", "<EOF>");
 		tokenizer.addPattern("[\u0000-\u001F]|\u007F", "<ILLEGAL>");
+		tokenizer.addPattern("&", "<ILLEGAL>");	  //insert the rest of the illegal chars here
 		tokenizer.addPattern("\\{[^\\}]*\\}", "<COMMENT>");
 
 		tokenizer.tokenize();
