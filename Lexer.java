@@ -97,6 +97,7 @@ public class Lexer {
 		tokenizer.addPattern("'[^']{1}'", "<LITCHAR>");
 		tokenizer.addPattern("/0", "<EOF>");
 		tokenizer.addPattern("[\u0000-\u001F]|\u007F", "<ILLEGAL>");
+		tokenizer.addPattern("\\{[^\\}]*\\}", "<COMMENT>");
 
 		tokenizer.tokenize();
 		System.out.printf("%29s  \t%s\n","TOKENS", "IMAGE" );
@@ -108,6 +109,7 @@ public class Lexer {
 		}
 		//tokenizer.printSymbolTable();
 		tokenizer.allSymbols();
+		tokenizer.prepareKeywordPatterns();
 	}
 
 }

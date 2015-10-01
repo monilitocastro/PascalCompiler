@@ -40,5 +40,5 @@ begin
 			write(chr(x)); write(", ");
 			x := x + 1;
 		end;
-	write(chr(x));write(chr(x));
+	write(chr(x));
 end.

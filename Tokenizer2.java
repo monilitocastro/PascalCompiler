@@ -16,21 +16,25 @@ public class Tokenizer2 {
 	private LinkedList<TokenListElement> tokenList;
 	private LinkedList<PatternListElement> patterns;
 	private LinkedList<SymbolAttributes> symbolStack;
+	private LinkedList<String> allRegex;
 	private Hashtable<String, LinkedList<SymbolAttributes> > symbolTable;
 	private String source;
 	private int tokenIndex = 0;
+	private Pattern  keywordPatterns;
 	private boolean isInsideVarDecl = false;
 	private boolean isImmAfterFuncTkn = false;
 	private boolean isImmAfterProgram = false;
 	private boolean isAssigningValue = false;
 	private String lastID = "";
 	private StringBuilder postLexBuilder;
+
 	Tokenizer2(String src){
 		source = src.trim();
 		tokenList = new LinkedList<TokenListElement>();
 		patterns = new LinkedList<PatternListElement>();
 		symbolStack = new LinkedList<SymbolAttributes>();
 		symbolTable = new Hashtable<    String, LinkedList<SymbolAttributes>     >();
+		allRegex = new LinkedList<String>();
 		postLexBuilder = new StringBuilder();
 	}
 	public void tokenize(){
@@ -79,7 +83,7 @@ public class Tokenizer2 {
 					System.exit(-1);
 				}
 				TokenListElement elemToAdd = new TokenListElement(image, currBiggestPattern.token);
-				tokenList.add( elemToAdd );
+				if(!currBiggestPattern.token.equals("<COMMENT>")){tokenList.add( elemToAdd );}
 				tokenIndex++;
 				//Symbol table
 				addToSymbolTable(image, currBiggestPattern.token, tokenIndex);
@@ -131,7 +135,9 @@ public class Tokenizer2 {
 		if(!token.equals("<ID>") ){
 			return;
 		}
-
+		//if(identifierIsAKeyword(name)){
+		//	postLexBuilder.append("ERROR: "+name +" is a keyword and isn't a valid identifier.");
+		//}
 		if(isAssigningValue){
 			if(!isSameType(name, lastID)){
 				postLexBuilder.append("ERROR: wrong data type on token number "+ index+"\n");
@@ -182,6 +188,21 @@ public class Tokenizer2 {
 	}
 	public void addPattern(String regex, String tkn){
 		patterns.add( new PatternListElement(Pattern.compile( "^("+regex+")") , tkn ) );
+		if(!tkn.equals("<COMMENT>") && !tkn.equals("<ILLEGAL>") ){allRegex.add(regex);}
+	}
+	public Pattern unionCompileAllRegex(){
+		StringBuilder build = new StringBuilder();
+		build.append("^(");
+		for(int i = 0 ; i < allRegex.size(); i++){
+			build.append(allRegex.get(i));
+			if(i < allRegex.size()-1){
+				build.append("|");
+			}else{
+				build.append(")");
+			}
+		}
+		//System.out.println(build.toString());
+		return Pattern.compile(build.toString() );
 	}
 	public LinkedList<TokenListElement> getTokens(){
 		return tokenList;
@@ -231,5 +252,12 @@ public class Tokenizer2 {
 			}		
 		}
 		return false;
+	}
+	public void prepareKeywordPatterns(){
+		keywordPatterns = unionCompileAllRegex();
+	}
+	public boolean identifierIsAKeyword(String name){
+		Matcher mat = keywordPatterns.matcher(name);
+		return mat.find();
 	}
 }

@@ -1,7 +1,7 @@
 program TestProgram;
 	var x, y, z : integer;
 	var a, b, c : char;
-
+{Comments!!!!!!!!!!!!!!!!!!!!}
 begin
 	write("Enter number to count to from 0: ");
 	read(x);
@@ -17,7 +17,7 @@ begin
 	writeln(z);
 
 	x := b;
-	
+
 	writeln(ord('0'));
 	y := z* (z + ord('0') - 3) +  x / 2;
 	writeln(y);
