@@ -4,6 +4,7 @@
  * email: monilito.castro@my.und.edu
  * Pascal module
  */
+import java.lang.StringBuilder;
 import java.util.LinkedList;
 import java.util.Hashtable;
 import java.util.Set;
@@ -21,12 +22,16 @@ public class Tokenizer2 {
 	private boolean isInsideVarDecl = false;
 	private boolean isImmAfterFuncTkn = false;
 	private boolean isImmAfterProgram = false;
+	private boolean isAssigningValue = false;
+	private String lastID = "";
+	private StringBuilder postLexBuilder;
 	Tokenizer2(String src){
 		source = src.trim();
 		tokenList = new LinkedList<TokenListElement>();
 		patterns = new LinkedList<PatternListElement>();
 		symbolStack = new LinkedList<SymbolAttributes>();
 		symbolTable = new Hashtable<    String, LinkedList<SymbolAttributes>     >();
+		postLexBuilder = new StringBuilder();
 	}
 	public void tokenize(){
 		if(source==null){
@@ -50,7 +55,6 @@ public class Tokenizer2 {
 				if(mat.find()){
 					int currSize = mat.end() - mat.start();
 					if (currSize>tokenSize){
-						//System.out.println("currSize="+currSize);
 						currBiggestPattern = patElem;
 						tokenSize = currSize;
 						biggestFound = true;
@@ -69,7 +73,6 @@ public class Tokenizer2 {
 				if(mat.find()){
 					image = mat.group().trim();
 					source = mat.replaceFirst("").trim();
-					//System.out.println("tokenSize="+tokenSize);
 
 				}else{
 					System.out.println("Warning: found string at first but lost it. Line 49 to 62 Tokenizer2 class");
@@ -85,7 +88,6 @@ public class Tokenizer2 {
 				//flag to determine if inside var declaration
 				if(image.equals("Var") || image.equals("var")){
 					isInsideVarDecl = true;
-					//System.out.println("is inside the flagging op.");
 				}
 				if((image.equals("Integer") || image.equals("integer")) && isInsideVarDecl  ){
 					//do everything here before turning off isInsideVarDecl
@@ -95,6 +97,13 @@ public class Tokenizer2 {
 				if((image.equals("String") || image.equals("string")) && isInsideVarDecl ){
 					assignAllSymbolStack("STRING_ID");
 					isInsideVarDecl = false;
+				}
+				if((image.equals("Char") || image.equals("char")) && isInsideVarDecl ){
+					assignAllSymbolStack("CHAR_ID");
+					isInsideVarDecl = false;
+				}
+				if(image.equals(":=")){
+					isAssigningValue = true;
 				}
 				//flag to determine if immediately after a function token
 				if(isImmAfterFuncTkn){
@@ -123,6 +132,14 @@ public class Tokenizer2 {
 			return;
 		}
 
+		if(isAssigningValue){
+			if(!isSameType(name, lastID)){
+				postLexBuilder.append("ERROR: wrong data type on token number "+ index+"\n");
+				postLexBuilder.append("\t\t" + lastID + " := " + name + " are two different types.");
+			}
+			isAssigningValue = false;
+		}
+		lastID = name;
 		if(isInsideVarDecl){
 			symAttr.tokenType = "VARIABLE_ID";
 			symAttr.optionalImage = name;
@@ -140,6 +157,10 @@ public class Tokenizer2 {
 			symAttr.optionalImage = name;
 		}
 
+		if(!isInsideVarDecl && !isImmAfterProgram && !isImmAfterFuncTkn){
+			return;
+		}
+
 		if(symbolTable.containsKey(name)){
 			listSymAttr = symbolTable.get(name);
 			//enter code here to update the symbol with new scope information
@@ -148,8 +169,6 @@ public class Tokenizer2 {
 
 			symbolTable.put(name, listSymAttr);
 		}
-
-		System.out.println("ID "+ name + " has "+listSymAttr.size());
 		listSymAttr.add(symAttr);
 
 	}
@@ -186,7 +205,31 @@ public class Tokenizer2 {
 		}
 	}
 	public void allSymbols(){
-		System.out.println("*********************Symbol table contents.*********************");
-		System.out.println("<:> denotes usage of the identifier.\n"+symbolTable.toString());
+		System.out.println("*********************Symbol table contents*********************");
+		System.out.println("format: image_of_token = [ list, of, identifiers ]");
+		System.out.println(symbolTable.toString());
+		System.out.println(postLexBuilder.toString());
+	}
+	public boolean isSameType(String name1, String name2){
+		if(!symbolTable.containsKey(name1)){
+			postLexBuilder.append("ERROR: Undeclared identifier "+name1+"\n");
+			return false;
+		}
+		if(!symbolTable.containsKey(name2)){
+			postLexBuilder.append("ERROR: Undeclared identifier "+name2+"\n");
+			return false;
+		}
+		LinkedList<SymbolAttributes> listSymAttr1 = symbolTable.get(name1);
+		LinkedList<SymbolAttributes> listSymAttr2 = symbolTable.get(name2);
+		
+		for( SymbolAttributes symAttr1 : listSymAttr1){
+			for( SymbolAttributes symAttr2 : listSymAttr2){
+				if(symAttr1.tokenType.equals(symAttr2.tokenType)){
+
+					return true;
+				}
+			}		
+		}
+		return false;
 	}
 }

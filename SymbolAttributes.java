@@ -7,7 +7,7 @@ public class SymbolAttributes{
 	  public int tokenListEnd= -1;
 	  public String toString(){
 	  	StringBuilder build = new StringBuilder();
-	  	build.append("<"+ tokenType + ":" + optionalImage+"> ");
+	  	build.append("<"+ tokenType + ":" + optionalImage+">");
 	  	return build.toString();
 	  }
 }
