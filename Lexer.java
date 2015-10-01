@@ -52,6 +52,7 @@ public class Lexer {
 		tokenizer.addPattern("(C|c)har", "<CHAR>");
 		tokenizer.addPattern("(C|c)hr", "<CHR>");
 		tokenizer.addPattern("(D|d)iv", "<DIV>");
+		tokenizer.addPattern("(D|d)o", "<DO>");
 		tokenizer.addPattern("(E|e)lse", "<ELSE>");
 		tokenizer.addPattern("(E|e)nd", "<END>");
 		tokenizer.addPattern("(I|i)f", "<IF>");
@@ -74,6 +75,7 @@ public class Lexer {
 		tokenizer.addPattern("\\+", "<ADD_OP>");
 		tokenizer.addPattern("-", "<SUBTRACT_OP>");
 		tokenizer.addPattern("\\*", "<MULT_OP>");
+		tokenizer.addPattern("/", "<DIV_OP>");
 		tokenizer.addPattern("<=", "<LESSEQUAL>");
 		tokenizer.addPattern("<", "<LESS>");
 		tokenizer.addPattern("!=", "<NOTEQUAL>");
