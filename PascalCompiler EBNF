@@ -1,0 +1,18 @@
+program := program-head block "."
+program-head := program-identifier (identifier-list) ";"
+block := declaration-part statement-part
+declaration-part := [label-part][constant-part][type-part][var-part] function-procedure
+constant-part := "const" constant-definition ";" {constant-definition ";"}
+constant-definition := constant-identifier "=" constant
+type-part := "type" type-definition ";" {type-definition ";"}
+type-definition := type-identifier "=" type
+var-part := "var" var-declaration ";" {var-declaration ";"}
+var-declaration := var-identifier ":" type
+function-procedure {(procedure-declaration | function-declaration) ";"}
+function-declaration := function-head ";" function-body
+function-head := [formal-parameter-list] ":" result-type
+function-body := block
+statement-part := "Begin" statement-sequence "End"
+statement-sequence := statement {";" statement}
+statement := ... | procedure-statement | ...
+procedure-statement := identifier [actual-parameter-list]
