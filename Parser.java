@@ -1,36 +1,41 @@
 import java.util.Stack;
 
 public class Parser{
-	private Stack<String> stack;
+	private Stack stack;
 	private PredictTable prTable;
 	Parser(){
 		stack = new Stack<String>();
+		stack.push("$");
+		stack.push("<program>");
 		//define predictTable with proper size.
 	}
 	public void parse(){
-		String token = "<program>";
+		String token = nextToken();		//the string should be "<program>"
 		String X;
 		while(true){
 			X = stack.peek();
 			if( terminal(X) | dollar(X)){
 				if(token.equals(X)){
 					stack.pop();
-					a = nextToken();
+					token = nextToken();
 				}else{
 					printError();
 				}
 			}else{
-				if( prTable.equals(X, token, "X->Y1 Y2 Y3") ){
+				if( prTable.equals(X, token, arrayRepresentingSomeProd) ){
 					stack.pop();
 					stack.push(Y3);//then Y2 Y1
 				}else{
 					printError();
 				}
 			}
-			if(X.equals("$"))break;
+			if(dollar(X) )break;
 		}
 	}
 	
+	printError(){
+		System.out.println("ERROR.");
+	}
 	
 	
 }
