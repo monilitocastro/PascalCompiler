@@ -1,0 +1,77 @@
+<program> -> <PROGRAM> <ID> <SEMICOLON> <block> <PERIOD>
+
+<block> ->	<variable_declaration_part> <procedure_declaration_part> <statement_part>
+
+<variable_declaration_part> ->	<empty> | <VAR> <variable_declaration> <SEMICOLON> { <variable_declaration> <SEMICOLON> }
+
+<variable_declaration> ->	<ID> { <COMMA> <ID> } <COLON> <type>
+
+<type> ->	<simple_type> | <array_type>
+
+<array_type> ->	<ARRAY> <LBRACK> <index_range> <RBRACK> <OF> <simple_type>
+
+<index_range> ->	<integer_constant> <RANGE_OP> <integer_constant>
+
+<simple_type> ->	<type_identifier>
+
+<type_identifier> ->	<ID>
+
+<procedure_declaration_part> ->	{ <procedure_declaration> <SEMICOLON> }
+
+<procedure_declaration> ->	<PROCEDURE> <ID> <SEMICOLON> <block>
+
+<statement_part> ->	<compound_statement>
+
+<compound_statement> ->	<BEGIN> <statement>{ <SEMICOLON> <statement> } <END>
+
+<statement> ->	<simple_statement> | <structured_statement>
+
+<simple_statement> ->	<assignment_statement> | <procedure_statement> | <read_statement> | <write_statement>
+
+<assignment_statement> ->	<variable> <ASSIGN> <expression>
+
+<procedure_statement> ->	<procedure_identifier>
+
+<procedure_identifier> ->	<ID>
+
+<read_statement> ->	<READ> <LPAREN> <input_variable> { <COMMA> <input_variable> } <RPAREN> 
+
+<input_variable> ->	<variable>
+
+<write_statement> ->	<WRITE> <LPAREN> <output_value> { <COMMA> <output_value> } <RPAREN> 
+
+<output_value> ->	<expression>
+
+<structured_statement> ->	<compound_statement> | <if_statement> | <while_statement> 
+
+<if_statement> ->	<IF> <expression> <THEN> <statement> | <IF> <expression> <THEN> <statement> <ELSE> <statement>
+
+<while_statement> ->	<WHILE> <expression> <DO> <statement>
+
+<expression> ->	<simple_expression> | <simple_expression> <relational_operator> <simple_expression>
+
+<simple_expression> ->	<sign> <term> { <adding_operator> <term> }
+
+<term> ->	<factor> { <multiplying_operator> <factor> }
+
+<factor> ->	<variable> | <constant> | <LPAREN> <expression> <RPAREN> | <NOT_OP> <factor>
+
+<relational_operator> ->	<EQUAL> | <NOT_EQUAL> | <LESS> | <LESSEQUAL> | <GREATEQUAL> | <GREATER>
+
+<sign> ->	<ADD_OP> | <SUBTRACT_OP> | <empty>
+
+<adding_operator> ->	<ADD_OP> | <SUBTRACT_OP> | <OR>
+
+<multiplying_operator> ->	<MULT_OP> | <DIV> | <AND>
+
+<variable> ->	<entire_variable> | <indexed_variable>
+
+<indexed_variable> ->	<array_variable> <LBRACK> <expression> <RBRACK>
+
+<array_variable> ->	<entire_variable>
+
+<entire_variable> ->	<variable_identifier>
+
+<variable_identifier> ->	<ID>
+
+<constant> ->	<NUMBER> | <LITCHAR> | <ID>
