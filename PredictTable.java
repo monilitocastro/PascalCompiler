@@ -1,10 +1,14 @@
-import java.util.HashTable;
+import java.util.*;
+import java.io.*;
 
 public class PredictTable{
 	private Scanner scanner;
 	private File file;
 	
-	public void openFile(String fileName) {
+	
+	
+	
+	public void openFile(String fileName){
 		try {
 			file = new File(fileName);
    			scanner = new Scanner(file);
@@ -15,7 +19,7 @@ public class PredictTable{
  	
  	public String [] getLineSplit(){
  		if(scanner.hasNext() ){
- 			return scanner.next().split();
+ 			return scanner.next().split(",");
  
  		}
 		return null;
