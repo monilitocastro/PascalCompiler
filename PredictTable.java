@@ -1,5 +1,9 @@
-import java.util.*;
-import java.io.*;
+import java.util.Hashtable;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.Enumeration;
+import java.lang.StringBuilder;
+import java.io.File;
 
 public class PredictTable{
 	private Scanner scanner;
@@ -13,6 +17,24 @@ public class PredictTable{
 	protected void finalize(){
 		closeFile();
 	}
+
+	public boolean equals(String X, String token, String[] strArr){
+		//where X is the lhs of production, token is member of sigma*
+		//and arrayRepresentationOfProd is RHS of production (a list)
+		StringBuilder keyBuild = new StringBuilder();
+		keyBuild.append(X.trim()+","+token.trim());
+		String key = keyBuild.toString();
+		if(!table.containsKey(key)){
+			System.out.println("ERROR: key is not in predict table");
+			return false;
+		}
+		if(!table.contains(key)){
+			System.out.println("ERROR: value is not in predict table");
+			return false;
+		}
+		return Arrays.equals(table.get(key),strArr);
+	}
+
 	public void initPredictTable(){
 		openFile("Pascal.ebnf");
 
@@ -64,7 +86,7 @@ public class PredictTable{
  			return scanner.next().split(",");
  
  		}
- 		//				WARNING: guard agains this return value
+ 		//				WARNING: guard against this return value
 		return null;
  	}
  	

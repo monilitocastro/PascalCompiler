@@ -33,7 +33,7 @@ public class Parser{
 		}
 	}
 	
-	printError(){
+	private void printError(){
 		System.out.println("ERROR.");
 	}
 	
