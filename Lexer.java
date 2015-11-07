@@ -12,6 +12,7 @@ import java.util.LinkedList;
 
 
 public class Lexer {
+	Tokenizer2 tokenizer;
 
 	/**
 	 * Testing program for Tokenizer class. This holds the only main method in the project.
@@ -25,7 +26,18 @@ public class Lexer {
 			String source;
 			try{
 				source = loadStringFromFile(s);
-				TokenizeAndPrint(source);
+				System.out.printf("%29s  \t%s\n","TOKENS", "IMAGE" );
+				System.out.printf("%29s  \t%s\n","------", "-----" );
+
+				LinkedList<TokenListElement> list = tokenizer.getTokens();
+				for( TokenListElement e : list){
+					System.out.printf("%29s  \t%s\n",e.token,e.regex );
+				}
+				//tokenizer.printSymbolTable();
+				//tokenizer.allSymbols();
+				//tokenizer.prepareKeywordPatterns();
+
+				String str = tokenizer
 			}catch ( IOException e){
 				System.out.println("Error with file " + s + "\n"+e.getMessage());
 				break;
@@ -44,8 +56,8 @@ public class Lexer {
 		fileInput.close();
 		return build.toString();
 	}
-	public static void TokenizeAndPrint(String source){
-		Tokenizer2 tokenizer = new Tokenizer2(source);
+	public static void InitTokenizer(String source){
+		tokenizer = new Tokenizer2(source);
 		tokenizer.addPattern("(A|a)nd", "<AND>");
 		tokenizer.addPattern("(A|a)rray", "<Array>");
 		tokenizer.addPattern("(B|b)egin", "<BEGIN>");
@@ -100,17 +112,7 @@ public class Lexer {
 		tokenizer.addPattern("&", "<ILLEGAL>");	  //insert the rest of the illegal chars here
 		tokenizer.addPattern("\\{[^\\}]*\\}", "<COMMENT>");
 
-		tokenizer.tokenize();
-		System.out.printf("%29s  \t%s\n","TOKENS", "IMAGE" );
-		System.out.printf("%29s  \t%s\n","------", "-----" );
 
-		LinkedList<TokenListElement> list = tokenizer.getTokens();
-		for( TokenListElement e : list){
-			System.out.printf("%29s  \t%s\n",e.token,e.regex );
-		}
-		//tokenizer.printSymbolTable();
-		tokenizer.allSymbols();
-		tokenizer.prepareKeywordPatterns();
 	}
 
 }

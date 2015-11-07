@@ -28,6 +28,14 @@ public class Tokenizer2 {
 	private String lastID = "";
 	private StringBuilder postLexBuilder;
 
+	private int tokenSize = 0;
+	private PatternListElement currBiggestPattern = null; 
+	private boolean biggestFound = false;
+	private Pattern pat;
+	private Matcher mat;
+	private String image;
+	private TokenListElement elemToAdd;
+
 	Tokenizer2(String src){
 		source = src.trim();
 		tokenList = new LinkedList<TokenListElement>();
@@ -43,12 +51,12 @@ public class Tokenizer2 {
 			/**
 			* Finds the biggest token for the input stream
 			*/
-			int tokenSize = 0;
-			PatternListElement currBiggestPattern = null;   //null values, are they possible?
-			boolean biggestFound = false;
+			//int tokenSize = 0;
+			//PatternListElement currBiggestPattern = null;   //null values, are they possible?
+			//boolean biggestFound = false;
 			for(PatternListElement patElem : patterns){
-				Pattern pat = patElem.pattern;
-				Matcher mat = pat.matcher(source);
+				pat = patElem.pattern;
+				mat = pat.matcher(source);
 				if(mat.find()){
 					int currSize = mat.end() - mat.start();
 					if (currSize>tokenSize){
@@ -65,9 +73,9 @@ public class Tokenizer2 {
 				*     1) trim input string to reflect the chosen regex consuming the string.
 				*     2) add token to list
 				*/
-				String image = "";
-				Pattern pat = currBiggestPattern.pattern;
-				Matcher mat = pat.matcher(source);
+				image = "";
+				pat = currBiggestPattern.pattern;
+				mat = pat.matcher(source);
 				if(mat.find()){
 					image = mat.group().trim();
 					source = mat.replaceFirst("").trim();
@@ -76,7 +84,7 @@ public class Tokenizer2 {
 					System.out.println("Warning: found string at first but lost it. Line 49 to 60 Tokenizer2 class");
 					System.exit(-1);
 				}
-				TokenListElement elemToAdd = new TokenListElement(image, currBiggestPattern.token);
+				elemToAdd = new TokenListElement(image, currBiggestPattern.token);
 
 				if(currBiggestPattern.token.equals("<ILLEGAL>")){postLexBuilder.append("ERROR: Illegal characters detected.\n");}
 
@@ -143,12 +151,12 @@ public class Tokenizer2 {
 			/**
 			* Finds the biggest token for the input stream
 			*/
-			int tokenSize = 0;
-			PatternListElement currBiggestPattern = null;   //null values, are they possible?
-			boolean biggestFound = false;
+			tokenSize = 0;
+			currBiggestPattern = null;   //null values, are they possible?
+			biggestFound = false;
 			for(PatternListElement patElem : patterns){
-				Pattern pat = patElem.pattern;
-				Matcher mat = pat.matcher(source);
+				pat = patElem.pattern;
+				mat = pat.matcher(source);
 				if(mat.find()){
 					int currSize = mat.end() - mat.start();
 					if (currSize>tokenSize){
@@ -165,9 +173,9 @@ public class Tokenizer2 {
 				*     1) trim input string to reflect the chosen regex consuming the string.
 				*     2) add token to list
 				*/
-				String image = "";
-				Pattern pat = currBiggestPattern.pattern;
-				Matcher mat = pat.matcher(source);
+				image = "";
+				pat = currBiggestPattern.pattern;
+				mat = pat.matcher(source);
 				if(mat.find()){
 					image = mat.group().trim();
 					source = mat.replaceFirst("").trim();
@@ -176,7 +184,7 @@ public class Tokenizer2 {
 					System.out.println("Warning: found string at first but lost it. Line 49 to 62 Tokenizer2 class");
 					System.exit(-1);
 				}
-				TokenListElement elemToAdd = new TokenListElement(image, currBiggestPattern.token);
+				elemToAdd = new TokenListElement(image, currBiggestPattern.token);
 				if(!currBiggestPattern.token.equals("<COMMENT>")){tokenList.add( elemToAdd );}
 				if(currBiggestPattern.token.equals("<ILLEGAL>")){postLexBuilder.append("ERROR: Illegal characters detected.\n");}
 
