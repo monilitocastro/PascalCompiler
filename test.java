@@ -5,11 +5,8 @@ public class test{
 		prTable.initPredictTable();
 		System.out.println(prTable.toString() );
 
-		String[] numbers = {"one", "two"};
-		String[] numeric = {"three", "two"};
-		String[] digits = {"one", "two"};
-
-		System.out.println(Arrays.equals(numbers, digits));
+		String[] arr = {"<PROGRAM>","<ID>","<body>","<END>","<PERIOD>"};
+		System.out.println(prTable.equals("<program>","<PROGRAM>",arr));
 
 	}
 }

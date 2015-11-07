@@ -1,9 +1,7 @@
-import java.util.Hashtable;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Enumeration;
+import java.util.*;
 import java.lang.StringBuilder;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class PredictTable{
 	private Scanner scanner;
@@ -28,10 +26,11 @@ public class PredictTable{
 			System.out.println("ERROR: key is not in predict table");
 			return false;
 		}
-		if(!table.contains(key)){
+		/*
+		if(!table.contains(key) ){
 			System.out.println("ERROR: value is not in predict table");
 			return false;
-		}
+		}*/
 		return Arrays.equals(table.get(key),strArr);
 	}
 
