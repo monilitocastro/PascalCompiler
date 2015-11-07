@@ -4,11 +4,14 @@ import java.io.*;
 public class PredictTable{
 	private Scanner scanner;
 	private File file;
-	private HashTable<String, String[]> table;
+	private Hashtable<String, String[]> table;
 
 
 	PredictTable(){
-		table = new HashTable<String, String[]>();
+		table = new Hashtable<String, String[]>();
+	}
+	protected void finalize(){
+		closeFile();
 	}
 	public void initPredictTable(){
 		openFile("Pascal.ebnf");
@@ -17,13 +20,35 @@ public class PredictTable{
 		//get element from predict set
 		//get the RHS of the production (the remaining)
 		String str[] = getLineSplit();
-		String lhsProd = str[0];
-		String elemSigma = str[1];
-		String rhsProd[] = new String[str.length-2];
-		System.arraycopy((Object)str, 2, (Object)rhsProd, str.length);
+		while(str!=null){
+			String lhsProd = str[0];
+			String elemSigma = str[1];
+			String rhsProd[];
+			rhsProd = rhsProductions(str);
+			StringBuilder build = new StringBuilder();
+			build.append(lhsProd.trim() + ","+elemSigma.trim() );
+			table.put(build.toString(), rhsProd );
+			str = getLineSplit();
+		}
+		
+
 	}
 	
-	
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		Enumeration e = table.keys();
+	    while (e.hasMoreElements()) {
+	      String key = (String) e.nextElement();
+	      StringBuilder build = new StringBuilder();
+	      build.append("[ ");
+	      for(String s : table.get(key)){
+	      	build.append(s + " ");
+	      }
+	      build.append("]");
+	      result.append(key + " : " + build.toString()+"\n");
+	    }
+		return result.toString();
+	}
 	
 	private void openFile(String fileName){
 		try {
@@ -39,10 +64,20 @@ public class PredictTable{
  			return scanner.next().split(",");
  
  		}
+ 		//				WARNING: guard agains this return value
 		return null;
  	}
  	
  	private void closeFile(){
  		scanner.close();
+ 	}
+
+ 	private String[] rhsProductions(String strArr[]){
+ 		int i = strArr.length-2;
+ 		String[] result = new String[ i ];
+ 		for(int j = 0; j < i; j++){
+ 			result[j] = strArr[j+2];
+ 		}
+ 		return result;
  	}
 }
