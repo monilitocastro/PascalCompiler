@@ -37,6 +37,99 @@ public class Tokenizer2 {
 		allRegex = new LinkedList<String>();
 		postLexBuilder = new StringBuilder();
 	}
+	public String nextToken(){
+
+		
+			/**
+			* Finds the biggest token for the input stream
+			*/
+			int tokenSize = 0;
+			PatternListElement currBiggestPattern = null;   //null values, are they possible?
+			boolean biggestFound = false;
+			for(PatternListElement patElem : patterns){
+				Pattern pat = patElem.pattern;
+				Matcher mat = pat.matcher(source);
+				if(mat.find()){
+					int currSize = mat.end() - mat.start();
+					if (currSize>tokenSize){
+						currBiggestPattern = patElem;
+						tokenSize = currSize;
+						biggestFound = true;
+					}
+				}
+			}
+
+			if(biggestFound){
+				/**
+				*  Does:
+				*     1) trim input string to reflect the chosen regex consuming the string.
+				*     2) add token to list
+				*/
+				String image = "";
+				Pattern pat = currBiggestPattern.pattern;
+				Matcher mat = pat.matcher(source);
+				if(mat.find()){
+					image = mat.group().trim();
+					source = mat.replaceFirst("").trim();
+
+				}else{
+					System.out.println("Warning: found string at first but lost it. Line 49 to 60 Tokenizer2 class");
+					System.exit(-1);
+				}
+				TokenListElement elemToAdd = new TokenListElement(image, currBiggestPattern.token);
+
+				if(currBiggestPattern.token.equals("<ILLEGAL>")){postLexBuilder.append("ERROR: Illegal characters detected.\n");}
+
+				tokenIndex++;
+				//Symbol table
+				addToSymbolTable(image, currBiggestPattern.token, tokenIndex);
+
+
+				//flag to determine if inside var declaration
+				if(image.equals("Var") || image.equals("var")){
+					isInsideVarDecl = true;
+				}
+				if((image.equals("Integer") || image.equals("integer")) && isInsideVarDecl  ){
+					//do everything here before turning off isInsideVarDecl
+					assignAllSymbolStack("INTEGER_ID");
+					isInsideVarDecl = false;
+				}
+				if((image.equals("String") || image.equals("string")) && isInsideVarDecl ){
+					assignAllSymbolStack("STRING_ID");
+					isInsideVarDecl = false;
+				}
+				if((image.equals("Char") || image.equals("char")) && isInsideVarDecl ){
+					assignAllSymbolStack("CHAR_ID");
+					isInsideVarDecl = false;
+				}
+				if(image.equals(":=")){
+					isAssigningValue = true;
+				}
+				//flag to determine if immediately after a function token
+				if(isImmAfterFuncTkn){
+					isImmAfterFuncTkn = false;
+				}
+				if(image.equals("Function") | image.equals("function")){
+					isImmAfterFuncTkn = true;
+				}
+
+				if(isImmAfterProgram){
+					isImmAfterProgram = false;
+				}
+				if(image.equals("Program") || image.equals("program") ){
+					isImmAfterProgram = true;
+				}
+
+				if(!currBiggestPattern.token.equals("<COMMENT>")){
+					return currBiggestPattern.token;
+				}
+
+
+			}
+			System.out.println("ERROR: Tokenizer2 doesn't have anything to return.");
+			return null;
+		
+	}
 	public void tokenize(){
 		if(source==null){
 			System.out.println("Source is empty. Exiting.");
