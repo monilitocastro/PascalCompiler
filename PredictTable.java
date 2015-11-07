@@ -4,21 +4,23 @@ import java.io.*;
 public class PredictTable{
 	private Scanner scanner;
 	private File file;
+	private HashTable<String, String[]> table;
 
 
+	PredictTable(){
+		table = new HashTable<String, String[]>();
+	}
 	public void initPredictTable(){
 		openFile("Pascal.ebnf");
 
-		//For each line in ebnf file get the cardinality of the predict set
 		//get the LHS of the production (1 item)
+		//get element from predict set
 		//get the RHS of the production (the remaining)
-		String str[] = prTable.getLineSplit();
-		int cardPrd = 0
-		for(int i=0; i < str.length; i++){
-			if(i==0){
-				cardPrd = Integer.parseInt(str[0]);
-			}
-		}
+		String str[] = getLineSplit();
+		String lhsProd = str[0];
+		String elemSigma = str[1];
+		String rhsProd[] = new String[str.length-2];
+		System.arraycopy((Object)str, 2, (Object)rhsProd, str.length);
 	}
 	
 	
