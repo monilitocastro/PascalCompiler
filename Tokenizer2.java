@@ -58,7 +58,7 @@ public class Tokenizer2 {
 			System.out.println("Patterns list is empty. Exiting.");
 			System.exit(0);
 		}
-		while(!source.equals("")){
+		if(!source.equals("")){
 			/**
 			* Finds the biggest token for the input stream
 			*/
@@ -143,6 +143,8 @@ public class Tokenizer2 {
 
 			}
 		}
+		return currBiggestPattern.token;
+
 	}
 	public void tokenize(){
 		if(source==null){
