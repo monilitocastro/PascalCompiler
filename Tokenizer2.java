@@ -79,6 +79,7 @@ public class Tokenizer2 {
 				*/
 				image = "";
 				pat = currBiggestPattern.pattern;
+				//System.out.println("pat = "+pat.pattern());
 				mat = pat.matcher(source);
 				if(mat.find()){
 					image = mat.group().trim();
@@ -86,6 +87,7 @@ public class Tokenizer2 {
 
 				}else{
 					System.out.println("Warning: found string at first but lost it. Line 49 to 60 Tokenizer2 class");
+					System.out.println(source);
 					System.exit(-1);
 				}
 				elemToAdd = new TokenListElement(image, currBiggestPattern.token);
