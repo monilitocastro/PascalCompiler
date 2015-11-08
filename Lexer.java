@@ -18,10 +18,17 @@ public class Lexer {
 	public void init(String s){
 		try{
 			_source = loadStringFromFile(s);
-			InitTokenizing(source);
+			InitTokenizing(_source);
 		}catch ( IOException e){
 			System.out.println("Error with file " + s + "\n"+e.getMessage());
 		}
+	}
+
+	public boolean hasNext(){
+		return _tokenizer.hasNext();
+	}
+	public String nextToken(){
+		return _tokenizer.nextToken();
 	}
 
 	public void InitTokenizing(String s2){

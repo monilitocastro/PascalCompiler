@@ -28,13 +28,13 @@ public class Tokenizer2 {
 	private String lastID = "";
 	private StringBuilder postLexBuilder;
 
-	private int tokenSize = 0;
-	private PatternListElement currBiggestPattern = null; 
-	private boolean biggestFound = false;
-	private Pattern pat;
-	private Matcher mat;
-	private String image;
-	private TokenListElement elemToAdd;
+	//private int tokenSize = 0;
+	//private PatternListElement currBiggestPattern = null; 
+	//private boolean biggestFound = false;
+	//private Pattern pat;
+	//private Matcher mat;
+	//private String image;
+	//private TokenListElement elemToAdd;
 
 	Tokenizer2(String src){
 		source = src.trim();
@@ -50,14 +50,21 @@ public class Tokenizer2 {
 		return !source.equals("");
 	}
 	public String nextToken(){
-
-		
+		if(source==null){
+			System.out.println("Source is empty. Exiting.");
+			System.exit(0);
+		}
+		if(patterns.isEmpty()){
+			System.out.println("Patterns list is empty. Exiting.");
+			System.exit(0);
+		}
+		while(!source.equals("")){
 			/**
 			* Finds the biggest token for the input stream
 			*/
-			//int tokenSize = 0;
-			//PatternListElement currBiggestPattern = null;   //null values, are they possible?
-			//boolean biggestFound = false;
+			tokenSize = 0;
+			currBiggestPattern = null;   //null values, are they possible?
+			biggestFound = false;
 			for(PatternListElement patElem : patterns){
 				pat = patElem.pattern;
 				mat = pat.matcher(source);
@@ -79,19 +86,17 @@ public class Tokenizer2 {
 				*/
 				image = "";
 				pat = currBiggestPattern.pattern;
-				//System.out.println("pat = "+pat.pattern());
 				mat = pat.matcher(source);
 				if(mat.find()){
 					image = mat.group().trim();
 					source = mat.replaceFirst("").trim();
 
 				}else{
-					System.out.println("Warning: found string at first but lost it. Line 49 to 60 Tokenizer2 class");
-					System.out.println(source);
+					System.out.println("Warning: found string at first but lost it. Line 49 to 62 Tokenizer2 class");
 					System.exit(-1);
 				}
 				elemToAdd = new TokenListElement(image, currBiggestPattern.token);
-
+				if(!currBiggestPattern.token.equals("<COMMENT>")){tokenList.add( elemToAdd );}
 				if(currBiggestPattern.token.equals("<ILLEGAL>")){postLexBuilder.append("ERROR: Illegal characters detected.\n");}
 
 				tokenIndex++;
@@ -134,15 +139,10 @@ public class Tokenizer2 {
 					isImmAfterProgram = true;
 				}
 
-				if(!currBiggestPattern.token.equals("<COMMENT>")){
-					return currBiggestPattern.token;
-				}
 
 
 			}
-			System.out.println("ERROR: Tokenizer2 doesn't have anything to return.");
-			return null;
-		
+		}
 	}
 	public void tokenize(){
 		if(source==null){
