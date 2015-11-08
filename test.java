@@ -1,12 +1,10 @@
 import java.util.Arrays;
 public class test{
 	public static void main(String[] args){
-		PredictTable prTable = new PredictTable();
-		prTable.initPredictTable();
-		System.out.println(prTable.toString() );
+		Lexer lex = new Lexer("test.pas");
 
-		String[] arr = {"<PROGRAM>","<ID>","<body>","<END>","<PERIOD>"};
-		System.out.println(prTable.equals("<program>","<PROGRAM>",arr));
-
+		while(lex.hasNext()){
+			System.out.println(lex.nextToken());
+		}
 	}
 }

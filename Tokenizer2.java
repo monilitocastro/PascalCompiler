@@ -45,6 +45,10 @@ public class Tokenizer2 {
 		allRegex = new LinkedList<String>();
 		postLexBuilder = new StringBuilder();
 	}
+
+	public boolean hasNext(){
+		return !source.equals("");
+	}
 	public String nextToken(){
 
 		

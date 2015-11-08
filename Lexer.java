@@ -12,40 +12,31 @@ import java.util.LinkedList;
 
 
 public class Lexer {
-	Tokenizer2 tokenizer;
+	private Tokenizer2 tokenizer;
+	private String source;
+	public boolean hasNext(){
+		return tokenizer.hasNext();
+	}
+	public String nextToken(){
+		return tokenizer.nextToken();
+	}	 
 
 	/**
 	 * Testing program for Tokenizer class. This holds the only main method in the project.
 	 * @param 
 	 */
-	public static void main(String[] args) {
-		for(String s : args){
-			System.out.println("\n***************************************************************");
-			System.out.println(  "*                         First Delivery                      *");
-			System.out.println(  "***************************************************************\n");
-			String source;
+	Lexer(String s) {
+			
 			try{
 				source = loadStringFromFile(s);
-				System.out.printf("%29s  \t%s\n","TOKENS", "IMAGE" );
-				System.out.printf("%29s  \t%s\n","------", "-----" );
-
-				LinkedList<TokenListElement> list = tokenizer.getTokens();
-				for( TokenListElement e : list){
-					System.out.printf("%29s  \t%s\n",e.token,e.regex );
-				}
-				//tokenizer.printSymbolTable();
-				//tokenizer.allSymbols();
-				//tokenizer.prepareKeywordPatterns();
-
-				String str = tokenizer
+				InitTokenizer(source);
 			}catch ( IOException e){
 				System.out.println("Error with file " + s + "\n"+e.getMessage());
-				break;
 			}
-		}
+		
 		
 	}
-	public static String loadStringFromFile(String filename) throws IOException{
+	private  String loadStringFromFile(String filename) throws IOException{
 		FileInputStream fileInput = new FileInputStream(filename);
 		StringBuilder build = new StringBuilder();
 		int r;
@@ -56,7 +47,7 @@ public class Lexer {
 		fileInput.close();
 		return build.toString();
 	}
-	public static void InitTokenizer(String source){
+	private void InitTokenizer(String source){
 		tokenizer = new Tokenizer2(source);
 		tokenizer.addPattern("(A|a)nd", "<AND>");
 		tokenizer.addPattern("(A|a)rray", "<Array>");
