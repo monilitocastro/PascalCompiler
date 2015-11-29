@@ -12,7 +12,7 @@
 <simple_type>,<INTEGER>,<INTEGER>,@INTDECLARE
 <simple_type>,<CHAR>,<CHAR>
 <procedure_declaration_part>,<PROCEDURE>,<procedure_declaration>,<SEMICOLON>,<procedure_declaration_part>
-<procedure_declaration>,<PROCEDURE>,<PROCEDURE>,<ID>,@PROCEDURE_ID_DECLARED,<SEMICOLON>,<block>
+<procedure_declaration>,<PROCEDURE>,<PROCEDURE>,<ID>,<SEMICOLON>,<block>
 <statement_part>,<BEGIN>,<compound_statement>
 <compound_statement>,<BEGIN>,<BEGIN>,@DOTTEXT,<statement>,<semicolon_statement_atom>,<END>
 <semicolon_statement_atom>,<SEMICOLON>,<SEMICOLON>,<statement>,<semicolon_statement_atom>

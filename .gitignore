@@ -2,3 +2,5 @@ bin
 *.java~
 *.class
 *.class~
+*.mips
+*.mips~
