@@ -30,8 +30,12 @@
 
 <statement> -> <simple_statement>
 
-<simple_statement> -> <assignment_statement> | <read_statement> | <write_statement>
+<simple_statement> -> <assignment_statement> | <procedure_statement> | <read_statement> | <write_statement>
 
+<procedure_statement> -> <procedure_identifier>
+
+<procedure_identifier> -> <ID>  
+  
 <read_statement> -> <READ> <LPAREN> <input_variable> <RPAREN>
 
 <input_variable> -> <variable>
