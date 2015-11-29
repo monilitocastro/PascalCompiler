@@ -30,6 +30,12 @@
 
 <statement> -> <simple_statement> | <structured_statement>
 
+<structured_statement> -> <compound_statement> | <if_statement> | <while_statement> 
+
+<if_statement> -> <IF> <simple_expression> <THEN> <statement> | <IF> <simple_expression> <THEN> <statement> <ELSE> <statement>
+
+<while_statement> -> <WHILE> <simple_expression> <DO> <statement>
+
 <simple_statement> -> <assignment_statement> | <procedure_statement> | <read_statement> | <write_statement>
 
 <procedure_statement> -> <procedure_identifier>
@@ -79,4 +85,3 @@
 <constant> -> <NUMBER> | <LITCHAR> | <ID>
 
 <integer_constant> -> <NUMBER>
-  
