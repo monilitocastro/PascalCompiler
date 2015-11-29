@@ -1,7 +1,6 @@
 program TestProgram;
 	var x, y, z : integer;
 	var x, y, z : char;
-
 begin
 	write("Enter number to count to from 0: ");
 	read(x);

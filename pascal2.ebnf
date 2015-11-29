@@ -1,0 +1,69 @@
+<program> -> <PROGRAM> <ID> <SEMICOLON> <block> <PERIOD>
+
+<block> ->	<variable_declaration_part> <procedure_declaration_part> <statement_part>
+
+<variable_declaration_part> ->	<empty> | <VAR> <var_decl_atom>
+
+<var_decl_atom> -> <variable_declaration> <SEMICOLON> <var_decl_atom> | <empty>
+
+<variable_declaration> ->	<ID> <id_comma_atom> <COLON> <type>
+
+<id_comma_atom> -> <COMMA> <ID> <id_comma_atom> | <empty>
+
+<type> ->	<simple_type> | <array_type>
+
+<simple_type> -> <INTEGER> | <CHAR>
+
+<procedure_declaration_part> ->	<procedure_declaration> <SEMICOLON> <procedure_declaration_part> | <empty>
+
+<procedure_declaration> ->	<PROCEDURE> <ID> <SEMICOLON> <block>
+
+<statement_part> ->	<compound_statement>
+
+<compound_statement> ->	<BEGIN> <statement> <semicolon_statement_atom> <END>
+
+<semicolon_statement_atom> -> <SEMICOLON> <statement> <semicolon_statement_atom> | <empty>
+
+<statement> ->	<simple_statement>
+
+<simple_statement> ->	<assignment_statement> | <read_statement> | <write_statement>
+
+<read_statement> ->	<READ> <LPAREN> <input_variable> <RPAREN>
+
+<input_variable> -> <variable>
+
+<write_statement> ->	<WRITE> <LPAREN> <QUOTESTR> <write_statement_atom> <RPAREN>
+
+<write_statement_atom> -> <COMMA> <output_value> <write_statement_atom> | <empty> 
+
+<assignment_statement> ->	<variable> <ASSIGN> <simple_expression> <simple_expression_atom>
+
+<simple_expression_atom> ->	<relational_operator> <simple_expression> | <empty>
+
+<variable> ->	<entire_variable>
+
+<entire_variable> ->	<variable_identifier>
+
+<variable_identifier> ->	<ID>
+
+<simple_expression> ->	<sign> <term> <adding_operator_atom>
+
+<adding_operator_atom> -> <adding_operator> <term> <adding_operator_atom> | <empty>
+
+<term> ->	<factor> <mult_operator_atom>
+
+<mult_operator_atom> -> <multiplying_operator> <factor> <mult_operator_atom> | <empty>
+
+<factor> ->	<variable> | <constant> | <LPAREN> <expression> <RPAREN> | <NOT_OP> <factor>
+
+<relational_operator> ->	<EQUAL> | <NOT_EQUAL> | <LESS> | <LESSEQUAL> | <GREATEQUAL> | <GREATER>
+
+<sign> ->	<ADD_OP> | <SUBTRACT_OP> | <empty>
+
+<adding_operator> ->	<ADD_OP> | <SUBTRACT_OP> | <OR>
+
+<multiplying_operator> ->	<MULT_OP> | <DIV> | <AND>
+
+<constant> ->	<NUMBER> | <LITCHAR> | <ID>
+
+<integer_constant> -> <NUMBER>
