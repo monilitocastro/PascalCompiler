@@ -28,7 +28,7 @@
 
 <semicolon_statement_atom> -> <SEMICOLON> <statement> <semicolon_statement_atom> | <empty>
 
-<statement> -> <simple_statement>
+<statement> -> <simple_statement> | <structured_statement>
 
 <simple_statement> -> <assignment_statement> | <procedure_statement> | <read_statement> | <write_statement>
 
@@ -50,7 +50,7 @@
 
 <variable> -> <entire_variable> | <indexed_variable>
 
-<indexed_variable> -> <array_variable> <LBRACK> <expression> <RBRACK>
+<indexed_variable> -> <array_variable> <LBRACK> <simple_expression> <RBRACK>
 
 <array_variable> -> <entire_variable>
   
@@ -66,7 +66,7 @@
 
 <mult_operator_atom> -> <multiplying_operator> <factor> <mult_operator_atom> | <empty>
 
-<factor> -> <variable> | <constant> | <LPAREN> <expression> <RPAREN> | <NOT_OP> <factor>
+<factor> -> <variable> | <constant> | <LPAREN> <simple_expression> <RPAREN> | <NOT_OP> <factor>
 
 <relational_operator> -> <EQUAL> | <NOT_EQUAL> | <LESS> | <LESSEQUAL> | <GREATEQUAL> | <GREATER>
 
@@ -79,3 +79,4 @@
 <constant> -> <NUMBER> | <LITCHAR> | <ID>
 
 <integer_constant> -> <NUMBER>
+  
