@@ -44,8 +44,12 @@
 
 <simple_expression_atom> -> <relational_operator> <simple_expression> | <empty>
 
-<variable> -> <entire_variable>
+<variable> -> <entire_variable> | <indexed_variable>
 
+<indexed_variable> -> <array_variable> <LBRACK> <expression> <RBRACK>
+
+<array_variable> -> <entire_variable>
+  
 <entire_variable> -> <variable_identifier>
 
 <variable_identifier> -> <ID>
