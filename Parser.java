@@ -138,6 +138,8 @@ public class Parser{
      icg.dataString(latestPopRegex);
     }else if(emitterCommand.equals("@EXIT")){
      icg.exit();
+     //TODO: maybe put test strings in this branch?
+     System.out.println("listOfProc content: "+listOfProc.toString() );
     }
     continue;
    }
