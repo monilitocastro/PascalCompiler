@@ -11,10 +11,6 @@
 <id_comma_atom> -> <COMMA> <ID> <id_comma_atom> | <empty>
 
 <type> -> <simple_type> | <array_type>
-  
-<array_type> -> <ARRAY> <LBRACK> <index_range> <RBRACK> <OF> <simple_type>
-
-<index_range> -> <integer_constant> <RANGE_OP> <integer_constant>
 
 <simple_type> -> <INTEGER> | <CHAR>
 

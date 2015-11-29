@@ -83,6 +83,7 @@ public class Lexer {
   _tokenizer.addPattern(":=", "<ASSIGN>");
   _tokenizer.addPattern(":", "<COLON>");
   _tokenizer.addPattern(";", "<SEMICOLON>");
+  _tokenizer.addPattern("\\.\\.", "<RANGE_OP>");
   _tokenizer.addPattern(",", "<COMMA>");
   _tokenizer.addPattern("\\(", "<LPAREN>");
   _tokenizer.addPattern("\\[", "<LBRACK>");

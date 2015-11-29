@@ -2,23 +2,19 @@
 
 <block> -> <variable_declaration_part> <procedure_declaration_part> <statement_part>
 
-<variable_declaration_part> -> <empty> | <VAR> <var_decl_atom>
+<variable_declaration_part> -> EPSILON | <VAR> <var_decl_atom>
 
-<var_decl_atom> -> <variable_declaration> <SEMICOLON> <var_decl_atom> | <empty>
+<var_decl_atom> -> <variable_declaration> <SEMICOLON> <var_decl_atom> | EPSILON
 
 <variable_declaration> -> <ID> <id_comma_atom> <COLON> <type>
 
-<id_comma_atom> -> <COMMA> <ID> <id_comma_atom> | <empty>
+<id_comma_atom> -> <COMMA> <ID> <id_comma_atom> | EPSILON
 
 <type> -> <simple_type> | <array_type>
-  
-<array_type> -> <ARRAY> <LBRACK> <index_range> <RBRACK> <OF> <simple_type>
-
-<index_range> -> <integer_constant> <RANGE_OP> <integer_constant>
 
 <simple_type> -> <INTEGER> | <CHAR>
 
-<procedure_declaration_part> -> <procedure_declaration> <SEMICOLON> <procedure_declaration_part> | <empty>
+<procedure_declaration_part> -> <procedure_declaration> <SEMICOLON> <procedure_declaration_part> | EPSILON
 
 <procedure_declaration> -> <PROCEDURE> <ID> <SEMICOLON> <block>
 
@@ -26,7 +22,7 @@
 
 <compound_statement> -> <BEGIN> <statement> <semicolon_statement_atom> <END>
 
-<semicolon_statement_atom> -> <SEMICOLON> <statement> <semicolon_statement_atom> | <empty>
+<semicolon_statement_atom> -> <SEMICOLON> <statement> <semicolon_statement_atom> | EPSILON
 
 <statement> -> <simple_statement>
 
@@ -38,11 +34,11 @@
 
 <write_statement> -> <WRITE> <LPAREN> <QUOTESTR> <write_statement_atom> <RPAREN>
 
-<write_statement_atom> -> <COMMA> <output_value> <write_statement_atom> | <empty> 
+<write_statement_atom> -> <COMMA> <output_value> <write_statement_atom> | EPSILON 
 
 <assignment_statement> -> <variable> <ASSIGN> <simple_expression> <simple_expression_atom>
 
-<simple_expression_atom> -> <relational_operator> <simple_expression> | <empty>
+<simple_expression_atom> -> <relational_operator> <simple_expression> | EPSILON
 
 <variable> -> <entire_variable>
 
@@ -52,17 +48,17 @@
 
 <simple_expression> -> <sign> <term> <adding_operator_atom>
 
-<adding_operator_atom> -> <adding_operator> <term> <adding_operator_atom> | <empty>
+<adding_operator_atom> -> <adding_operator> <term> <adding_operator_atom> | EPSILON
 
 <term> -> <factor> <mult_operator_atom>
 
-<mult_operator_atom> -> <multiplying_operator> <factor> <mult_operator_atom> | <empty>
+<mult_operator_atom> -> <multiplying_operator> <factor> <mult_operator_atom> | EPSILON
 
 <factor> -> <variable> | <constant> | <LPAREN> <expression> <RPAREN> | <NOT_OP> <factor>
 
 <relational_operator> -> <EQUAL> | <NOT_EQUAL> | <LESS> | <LESSEQUAL> | <GREATEQUAL> | <GREATER>
 
-<sign> -> <ADD_OP> | <SUBTRACT_OP> | <empty>
+<sign> -> <ADD_OP> | <SUBTRACT_OP> | EPSILON
 
 <adding_operator> -> <ADD_OP> | <SUBTRACT_OP> | <OR>
 
