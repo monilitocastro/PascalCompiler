@@ -46,6 +46,7 @@ public class Parser{
  */
  public void parse(){
   ArrayList<String> listOfVar = new ArrayList<String>();
+  ArrayList<String> listOfProc = new ArrayList<String>();
   String latestPopRegex = "";
   String latestID = "";
   String latestLHSVar = "";
@@ -63,8 +64,12 @@ public class Parser{
     stack.pop();
     if(emitterCommand.equals("@DOTDATA")){
      icg.dotData();
+     listOfProc = new ArrayList<String>();
     }else if(emitterCommand.equals("@VARDECLARE")){
      listOfVar.add(latestPopRegex);
+    }else if(emitterCommand.equals("@PROCEDURE_ID_DECLARED")){
+     latestPopRegex = latestID;
+     listOfProc.add(latestPopRegex);
     }else if(emitterCommand.equals("@INTDECLARE")){
      Object[] list = listOfVar.toArray();
      for(Object item: list){
