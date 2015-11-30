@@ -185,6 +185,7 @@ public class PredictTable{
    for(int i = 0; i <size_t; i++){
     for(int j = 0; j <size_p; j++){
      StringBuilder build = new StringBuilder();
+     //if(terms[i].equals("<CALL>") ){System.out.println("CALLLLLLLLLLLLLLL!!!!") };
      build.append( ((String)prods[j]).trim()+","+((String)terms[i]).trim() );
      String e[] = {"<error>"};
      table.put(build.toString(), e);
@@ -293,6 +294,7 @@ public class PredictTable{
   arrTerminals.add("<NUMBER>");
   arrTerminals.add("<QUOTESTR>");
   arrTerminals.add("<LITCHAR>");
+  arrTerminals.add("<CALL>");
 
   }
 }

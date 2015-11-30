@@ -18,6 +18,9 @@
 <semicolon_statement_atom>,<SEMICOLON>,<SEMICOLON>,<statement>,<semicolon_statement_atom>
 <statement>,<ID>,<simple_statement>
 <simple_statement>,<ID>,<assignment_statement>
+<procedure_statement>,<CALL>,<CALL>,<ID>,@CALL
+<statement>,<CALL>,<simple_statement>
+<simple_statement>,<CALL>,<procedure_statement>
 <assignment_statement>,<ID>,<variable>,@LHSVARIABLE,<ASSIGN>,<simple_expression>,<simple_expression_atom>,@STORE
 <simple_expression_atom>,<EQUAL>,<relational_operator>,<simple_expression>
 <simple_expression_atom>,<NOT_EQUAL>,<relational_operator>,<simple_expression>

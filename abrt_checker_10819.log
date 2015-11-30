@@ -1,0 +1,5 @@
+Uncaught java.lang.NullPointerException exception in thread "main" in a method ICGenerator.storeByte() with signature (Ljava/lang/String;)V
+Exception in thread "main" java.lang.NullPointerException
+	at ICGenerator.storeByte(ICGenerator.java:162) [file:/home/mcastro/PascalCompiler/ICGenerator.class]
+	at Parser.parse(Parser.java:113) [file:/home/mcastro/PascalCompiler/Parser.class]
+	at PascalCompiler.main(PascalCompiler.java:44) [file:/home/mcastro/PascalCompiler/PascalCompiler.class]

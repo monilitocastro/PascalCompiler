@@ -12,5 +12,6 @@ Begin
 Write("Please enter the degrees in Fahrenheit: ");
 Read(f);
 result := (f - 32) div 2;
+call proc3;
 Write("Celsius is ", result)
 End.

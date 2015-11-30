@@ -96,9 +96,11 @@ public class Parser{
      latestPopRegex = latestID;
      icg.loadVariable(latestPopRegex);
      //icg.pushByte();
+    }else if(emitterCommand.equals("@CALL") ){
+      checkIfInProc(latestID);
     }else if(emitterCommand.equals("@LHSVARIABLE")){
      latestLHSVar = latestPopRegex;
-     checkIfInProc(latestLHSVar);
+     //checkIfInProc(latestLHSVar);
     }else if(emitterCommand.equals("@CONSTANTNUMBER")){
      icg.loadImm(latestPopRegex);
     }else if(emitterCommand.equals("@ADD")){
@@ -238,7 +240,7 @@ public class Parser{
    if(!listOfProc.contains(latestLHSVar) ){
      return;
    }
-   //implement code that executes procedure.
+   icg.callProcedure(latestLHSVar);
  }
 
  /**
@@ -251,6 +253,7 @@ public class Parser{
   arrTerminals.add("<BEGIN>");
   arrTerminals.add("<CHAR>");
   arrTerminals.add("<CHR>");
+  arrTerminals.add("<CALL>");
   arrTerminals.add("<DIV>");
   arrTerminals.add("<DO>");
   arrTerminals.add("<ELSE>");

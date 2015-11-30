@@ -24,7 +24,13 @@ public class ICGenerator{
   build = new StringBuilder();
   dataBuild = new StringBuilder();
  }
-
+ /**
+  * this method jumps to a labeled procedure
+  * 
+  */
+ public void callProcedure(String name){
+   build.append("jal "+name+"\n");
+ }
  /*
   * This method inserts a named label so that mips could jump to section. 
   * @param string label take from procedure id or program name

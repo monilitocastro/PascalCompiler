@@ -40,7 +40,7 @@
 
 <simple_statement> -> <assignment_statement> | <procedure_statement> | <read_statement> | <write_statement>
 
-<procedure_statement> -> <procedure_identifier>
+<procedure_statement> -> <CALL> <procedure_identifier>
 
 <procedure_identifier> -> <ID>  
   

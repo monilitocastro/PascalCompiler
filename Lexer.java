@@ -70,6 +70,7 @@ public class Lexer {
   _tokenizer.addPattern("(W|w)hile", "<WHILE>");
   _tokenizer.addPattern("(W|w)rite(L|l)n", "<WRITELN>");
   _tokenizer.addPattern("(W|w)rite", "<WRITE>");
+  _tokenizer.addPattern("(C|c)all", "<CALL>");
   _tokenizer.addPattern("\\+", "<ADD_OP>");
   _tokenizer.addPattern("-", "<SUBTRACT_OP>");
   _tokenizer.addPattern("\\*", "<MULT_OP>");
@@ -142,6 +143,7 @@ public class Lexer {
   tokenizer.addPattern("(B|b)egin", "<BEGIN>");
   tokenizer.addPattern("(C|c)har", "<CHAR>");
   tokenizer.addPattern("(C|c)hr", "<CHR>");
+   tokenizer.addPattern("(C|c)all", "<CALL");
   tokenizer.addPattern("(D|d)iv", "<DIV>");
   tokenizer.addPattern("(D|d)o", "<DO>");
   tokenizer.addPattern("(E|e)lse", "<ELSE>");
