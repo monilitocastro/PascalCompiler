@@ -1,5 +1,5 @@
 <program>,<PROGRAM>,<PROGRAM>,<ID>,@DOTDATA,<SEMICOLON>,<block>,<PERIOD>,@EXIT
-<block>,<VAR>,<variable_declaration_part>,<procedure_declaration_part>,<statement_part>
+<block>,<VAR>,<variable_declaration_part>,<procedure_declaration_part>,@DOTTEXT,<statement_part>
 <block>,<BEGIN>,<statement_part>
 <variable_declaration_part>,<VAR>,<VAR>,<var_decl_atom>
 <var_decl_atom>,<ID>,<variable_declaration>,<SEMICOLON>,<var_decl_atom>
@@ -14,7 +14,7 @@
 <procedure_declaration_part>,<PROCEDURE>,<procedure_declaration>,<SEMICOLON>,<procedure_declaration_part>
 <procedure_declaration>,<PROCEDURE>,<PROCEDURE>,<ID>,@PROCEDURE_ID_DECLARED,<SEMICOLON>,<block>
 <statement_part>,<BEGIN>,<compound_statement>
-<compound_statement>,<BEGIN>,<BEGIN>,@DOTTEXT,<statement>,<semicolon_statement_atom>,<END>
+<compound_statement>,<BEGIN>,<BEGIN>,<statement>,<semicolon_statement_atom>,<END>
 <semicolon_statement_atom>,<SEMICOLON>,<SEMICOLON>,<statement>,<semicolon_statement_atom>
 <statement>,<ID>,<simple_statement>
 <simple_statement>,<ID>,<assignment_statement>

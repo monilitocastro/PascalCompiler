@@ -16,6 +16,7 @@ import java.util.Hashtable;
 public class Parser{
  private Stack<String> stack;
  private PredictTable prTable;
+ private ArrayList<String> listOfProc = new ArrayList<String>();
  private ArrayList<String> arrTerminals;
  private Lexer lex;
  private ICGenerator icg;
@@ -46,7 +47,8 @@ public class Parser{
  */
  public void parse(){
   ArrayList<String> listOfVar = new ArrayList<String>();
-  ArrayList<String> listOfProc = new ArrayList<String>();
+  boolean dotTextAlready = false;
+  boolean blInsideProcedure = false;
   String latestPopRegex = "";
   String latestID = "";
   String latestLHSVar = "";
@@ -70,6 +72,7 @@ public class Parser{
     }else if(emitterCommand.equals("@PROCEDURE_ID_DECLARED")){
      latestPopRegex = latestID;
      listOfProc.add(latestPopRegex);
+     blInsideProcedure = true;
     }else if(emitterCommand.equals("@INTDECLARE")){
      Object[] list = listOfVar.toArray();
      for(Object item: list){
@@ -78,13 +81,17 @@ public class Parser{
      }
      listOfVar = new ArrayList<String>();
     }else if(emitterCommand.equals("@DOTTEXT")){
-     icg.dotText();
+      if(!dotTextAlready){
+        dotTextAlready=true;
+        icg.dotText();
+      }
     }else if(emitterCommand.equals("@VARIABLE")){
      latestPopRegex = latestID;
      icg.loadVariable(latestPopRegex);
      //icg.pushByte();
     }else if(emitterCommand.equals("@LHSVARIABLE")){
      latestLHSVar = latestPopRegex;
+     checkIfInProc(latestLHSVar);
     }else if(emitterCommand.equals("@CONSTANTNUMBER")){
      icg.loadImm(latestPopRegex);
     }else if(emitterCommand.equals("@ADD")){
@@ -213,6 +220,18 @@ public class Parser{
    if(str.equals(X)) return true;
   }
   return false;
+ }
+ 
+ /**
+  * This method determines whether or not a LHS variable is a procedure.
+  * If so then we ask icg to jump to procedure code
+  */
+ 
+ private void checkIfInProc(String latestLHSVar){
+   if(!listOfProc.contains(latestLHSVar) ){
+     return;
+   }
+   //implement code that executes procedure.
  }
 
  /**
