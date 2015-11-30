@@ -13,9 +13,11 @@ import java.lang.StringBuilder;
 import java.lang.String;
 
 public class ICGenerator{
+ private boolean routine = false;
  private Hashtable<String, LinkedList<SymbolAttributes> > symbolTable;
  private StringBuilder build;
  private StringBuilder dataBuild;
+ private String endingLabel = "";
  private int postfix=0; private String lastStringCreated;
  ICGenerator(Hashtable<String, LinkedList<SymbolAttributes> > s){
   symbolTable=s;
@@ -23,6 +25,19 @@ public class ICGenerator{
   dataBuild = new StringBuilder();
  }
 
+ /*
+  * This method inserts a named label so that mips could jump to section. 
+  * @param string label take from procedure id or program name
+  */
+ public void addAddressLabel(String labelName){
+   if(endingLabel.equals(labelName)){
+     routine = false;
+     build.append("start:\n");
+     return;
+   }
+   endingLabel = labelName;
+   build.append("label"+labelName+":\n");
+ }
  /**
  * This method will return the assembly code representation of the
  * Pascal code you provide.
@@ -69,6 +84,7 @@ public class ICGenerator{
   if(symbolTable.containsKey(name)){
    LinkedList<SymbolAttributes> llAttr = symbolTable.get(name);
    Iterator it = llAttr.iterator();
+   
    while(it.hasNext()){
     SymbolAttributes item = (SymbolAttributes)it.next();
     if(item.tokenType.equals("INTEGER_ID")){
@@ -116,9 +132,14 @@ public class ICGenerator{
   dataBuild.append(String.format(".data\n"));
  } 
  public void dotText(){
-  build.append(String.format(".text\n"));
+  build.append(String.format(".text\njump start\n"));
  }
-
+ public void notInSubRoutine(){
+  if(!routine)build.append("jr $31\n");
+ }
+ public void changeRoutineState(boolean t){
+   routine = t;
+ }
  public void loadByte(String name){
   String memAddr = getVariableAttribute(name).memAddress;
   build.append(String.format("lw $t0, %s\n", memAddr));

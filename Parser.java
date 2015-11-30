@@ -48,7 +48,7 @@ public class Parser{
  public void parse(){
   ArrayList<String> listOfVar = new ArrayList<String>();
   boolean dotTextAlready = false;
-  boolean blInsideProcedure = false;
+  boolean blInsideProcedure = true;
   String latestPopRegex = "";
   String latestID = "";
   String latestLHSVar = "";
@@ -84,7 +84,14 @@ public class Parser{
       if(!dotTextAlready){
         dotTextAlready=true;
         icg.dotText();
+        icg.addAddressLabel(latestID);
+        
+      }else{
+        icg.addAddressLabel(latestID);
       }
+      
+    }else if(emitterCommand.equals("@NOT_IN_SUBROUTINE") ){
+      icg.notInSubRoutine();
     }else if(emitterCommand.equals("@VARIABLE")){
      latestPopRegex = latestID;
      icg.loadVariable(latestPopRegex);
