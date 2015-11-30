@@ -85,7 +85,7 @@ public class Parser{
         dotTextAlready=true;
         icg.dotText();
         icg.addAddressLabel(latestID);
-        
+        icg.changeRoutineState(true);
       }else{
         icg.addAddressLabel(latestID);
       }
@@ -155,7 +155,7 @@ public class Parser{
     }else if(emitterCommand.equals("@EXIT")){
      icg.exit();
      //TODO: maybe put test strings in this branch?
-     System.out.println("listOfProc content: "+listOfProc.toString() );
+     //System.out.println("listOfProc content: "+listOfProc.toString() );
     }
     continue;
    }
@@ -238,7 +238,8 @@ public class Parser{
  
  private void checkIfInProc(String latestLHSVar){
    if(!listOfProc.contains(latestLHSVar) ){
-     return;
+     System.out.println("Fatal Error: not a valid procedure name: " +latestLHSVar);
+     System.exit(1);
    }
    icg.callProcedure(latestLHSVar);
  }

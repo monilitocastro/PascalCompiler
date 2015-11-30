@@ -47,3 +47,6 @@
 <mult_operator_atom>,<END>
 <adding_operator_atom>,<END>
 <simple_expression_atom>,<END>
+<write_statement_atom>,<SEMICOLON>
+<adding_operator_atom>,<EQUAL>
+<adding_operator_atom>,<DO>

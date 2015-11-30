@@ -20,7 +20,17 @@
 <simple_statement>,<ID>,<assignment_statement>
 <procedure_statement>,<CALL>,<CALL>,<ID>,@CALL
 <statement>,<CALL>,<simple_statement>
+<statement>,<WHILE>,<structured_statement>
+<structured_statement>,<WHILE>,<while_statement>
+<while_statement>,<WHILE>,<WHILE>,<LPAREN>,<simple_expression>,<DO>,<block>
 <simple_statement>,<CALL>,<procedure_statement>
+<relational_expression>,<simple_expression>
+<mult_operator_atom>,<EQUAL>,<EQUAL>,<NUMBER>,<RPAREN>
+<mult_operator_atom>,<NOT_EQUAL>,<NOT_EQUAL>,<NUMBER>,<RPAREN>
+<mult_operator_atom>,<LESS>,<LESS>,<NUMBER>,<RPAREN>
+<mult_operator_atom>,<LESSEQUAL>,<LESSEQUAL>,<NUMBER>,<RPAREN>
+<mult_operator_atom>,<GREATEQUAL>,<GREATEQUAL>,<NUMBER>,<RPAREN>
+<mult_operator_atom>,<GREATER>,<GREATER>,<NUMBER>,<RPAREN>
 <assignment_statement>,<ID>,<variable>,@LHSVARIABLE,<ASSIGN>,<simple_expression>,<simple_expression_atom>,@STORE
 <simple_expression_atom>,<EQUAL>,<relational_operator>,<simple_expression>
 <simple_expression_atom>,<NOT_EQUAL>,<relational_operator>,<simple_expression>

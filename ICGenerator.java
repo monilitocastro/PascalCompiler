@@ -141,7 +141,7 @@ public class ICGenerator{
   build.append(String.format(".text\njump start\n"));
  }
  public void notInSubRoutine(){
-  if(!routine)build.append("jr $31\n");
+  if(routine)build.append("jr $31\n");
  }
  public void changeRoutineState(boolean t){
    routine = t;

@@ -1,5 +1,5 @@
 Program temperatureUnit;
-Var f, result : Integer;
+Var f, result ,a,b,c: Integer;
 Procedure proc1;
   Begin
    Write("Proc 1 called.")
@@ -12,6 +12,12 @@ Begin
 Write("Please enter the degrees in Fahrenheit: ");
 Read(f);
 result := (f - 32) div 2;
-call proc3;
-Write("Celsius is ", result)
+call proc2;
+Write("Celsius is ", result);
+a :=3;
+b := 1;
+while  (a = 3) do
+  Begin
+  b:=b+1
+  End;
 End.
