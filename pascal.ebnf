@@ -24,7 +24,6 @@
 <structured_statement>,<WHILE>,<while_statement>
 <while_statement>,<WHILE>,<WHILE>,<LPAREN>,<simple_expression>,<DO>,<block>
 <simple_statement>,<CALL>,<procedure_statement>
-<relational_expression>,<simple_expression>
 <mult_operator_atom>,<EQUAL>,<EQUAL>,<NUMBER>,<RPAREN>
 <mult_operator_atom>,<NOT_EQUAL>,<NOT_EQUAL>,<NUMBER>,<RPAREN>
 <mult_operator_atom>,<LESS>,<LESS>,<NUMBER>,<RPAREN>
