@@ -50,3 +50,4 @@
 <write_statement_atom>,<SEMICOLON>
 <adding_operator_atom>,<EQUAL>
 <adding_operator_atom>,<DO>
+<adding_operator_atom>,<THEN>

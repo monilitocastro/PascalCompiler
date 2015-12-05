@@ -47,6 +47,7 @@ public class Parser{
  */
  public void parse(){
   ArrayList<String> listOfVar = new ArrayList<String>();
+  String brComp ="";
   boolean dotTextAlready = false;
   boolean blInsideProcedure = true;
   String latestPopRegex = "";
@@ -67,6 +68,18 @@ public class Parser{
     if(emitterCommand.equals("@DOTDATA")){
      icg.dotData();
      listOfProc = new ArrayList<String>();
+    }else if(emitterCommand.equals("@FL_EQ") ){
+      brComp = "beq";
+    }else if(emitterCommand.equals("@FL_NEQ") ){
+      brComp = "bne";
+    }else if(emitterCommand.equals("@FL_L") ){
+      brComp = "bltz";
+    }else if(emitterCommand.equals("@FL_LEQ") ){
+      brComp = "blez";
+    }else if(emitterCommand.equals("@FL_GE") ){
+      brComp = "bgez";
+    }else if(emitterCommand.equals("@FL_G") ){
+      brComp = "bgtz";
     }else if(emitterCommand.equals("@VARDECLARE")){
      listOfVar.add(latestPopRegex);
     }else if(emitterCommand.equals("@PROCEDURE_ID_DECLARED")){
