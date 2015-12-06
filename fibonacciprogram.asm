@@ -3,14 +3,12 @@ a0:	.word		0
 b1:	.word		0
 c2:	.word		0
 order3:	.word		0
-ascii4:	.asciiz		" c= "
-ascii5:	.asciiz		" a="
-ascii6:	.asciiz		" b="
-ascii7:	.asciiz		" order="
-ascii8:	.asciiz		" ***** "
-ascii10:	.asciiz		"Please enter order of fibonacci sequence: "
-ascii11:	.asciiz		"The fibonacci number you are looking for is "
-ascii12:	.asciiz		".  Good bye!"
+ascii4:	.asciiz		" "
+ascii6:	.asciiz		"Please enter order of fibonacci sequence: "
+ascii7:	.asciiz		"\n"
+ascii8:	.asciiz		"The sequence is as follows: "
+ascii9:	.asciiz		" "
+ascii10:	.asciiz		".\nGood bye!"
 stackframe:  .word    0:400
 stackoffset: .word 0:1
 .text
@@ -42,33 +40,21 @@ add $t0, $t0, $t1
 addi $sp, $sp, -4
 sw $t0, 0($sp)
 sw $t0, c2
-li $v0, 4
-la $a0, ascii4
-syscall
-li $v0, 1
-lw $a0, c2
-syscall
 lw $t0, b1
 			#pushByte
 addi $sp, $sp, -4
 sw $t0, 0($sp)
 sw $t0, a0
-li $v0, 4
-la $a0, ascii5
-syscall
-li $v0, 1
-lw $a0, a0
-syscall
 lw $t0, c2
 			#pushByte
 addi $sp, $sp, -4
 sw $t0, 0($sp)
 sw $t0, b1
 li $v0, 4
-la $a0, ascii6
+la $a0, ascii4
 syscall
 li $v0, 1
-lw $a0, b1
+lw $a0, c2
 syscall
 lw $t0, order3
 			#pushByte
@@ -90,15 +76,6 @@ sub $t0, $t0, $t1
 addi $sp, $sp, -4
 sw $t0, 0($sp)
 sw $t0, order3
-li $v0, 4
-la $a0, ascii7
-syscall
-li $v0, 1
-lw $a0, order3
-syscall
-li $v0, 4
-la $a0, ascii8
-syscall
 lw $t0, order3
 			#pushByte
 addi $sp, $sp, -4
@@ -114,9 +91,9 @@ addi $sp, $sp, 4
 lw $t0, 0($sp)
 addi $sp, $sp, 4
 			#COMPARISON
-bne $t0, $t1, NOT_IF9
+ble $t0, $t1, NOT_IF5
 jal labelfibonacci
-NOT_IF9:		#NOT IF
+NOT_IF5:		#NOT IF
 lw $t4, stackoffset		#end of PROCEDURE
 sub $t4, $t4, 4
 sw $t4, stackoffset
@@ -126,11 +103,34 @@ lw $31, 0($t3)
 jr $31
 start:		#START
 li $v0, 4
-la $a0, ascii10
+la $a0, ascii6
 syscall
 li $v0,5
 syscall
 sw $v0, order3
+li $v0, 4
+la $a0, ascii7
+syscall
+lw $t0, order3
+			#pushByte
+addi $sp, $sp, -4
+sw $t0, 0($sp)
+li $t0, 2
+ 			#pushByte
+addi $sp, $sp, -4
+sw $t0, 0($sp)
+			#popSelectByte(1)
+lw $t1, 0($sp)
+addi $sp, $sp, 4
+			#popSelectByte(0)
+lw $t0, 0($sp)
+addi $sp, $sp, 4
+			#subtract
+sub $t0, $t0, $t1
+			#pushSelectByte(0)
+addi $sp, $sp, -4
+sw $t0, 0($sp)
+sw $t0, order3
 li $t0, 1
  			#pushByte
 addi $sp, $sp, -4
@@ -141,15 +141,26 @@ li $t0, 1
 addi $sp, $sp, -4
 sw $t0, 0($sp)
 sw $t0, b1
-jal labelfibonacci
+li $t0, 1
+ 			#pushByte
+addi $sp, $sp, -4
+sw $t0, 0($sp)
+sw $t0, c2
 li $v0, 4
-la $a0, ascii11
+la $a0, ascii8
 syscall
 li $v0, 1
-lw $a0, c2
+lw $a0, a0
 syscall
 li $v0, 4
-la $a0, ascii12
+la $a0, ascii9
+syscall
+li $v0, 1
+lw $a0, b1
+syscall
+jal labelfibonacci
+li $v0, 4
+la $a0, ascii10
 syscall
 li $v0, 10
 syscall
