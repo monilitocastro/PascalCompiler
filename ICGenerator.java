@@ -43,6 +43,13 @@ public class ICGenerator{
    }
    endingLabel = labelName;
    build.append("label"+labelName+":\n");
+   //push $31 into stackframe and increment stackoffset
+   build.append("la $t3, stackframe\n");
+   build.append("lb $t4, stackoffset\n");
+   build.append("add $t3, $t3, $t4\n");
+   build.append("sw $31, 0($t3)\n");
+   build.append("add $t4, $t4, 1\n");
+   build.append("sb $t4, stackoffset\n");
  }
  /**
  * This method will return the assembly code representation of the
@@ -51,6 +58,7 @@ public class ICGenerator{
  */
 
  public String compile(){
+  dataBuild.append("stackframe:  .space    500\nstackoffset: .word 0\n");   //bytesize elements
   dataBuild.append(build.toString());
   return dataBuild.toString();
  }
@@ -155,8 +163,17 @@ public class ICGenerator{
  public void dotText(){
   build.append(String.format(".text\nj start\n"));
  }
- public void notInSubRoutine(){
-  if(routine)build.append("jr $31\n");
+ public void notInSubRoutine(){  
+   if(routine){
+     build.append("lb $t4, stackoffset\n");
+     build.append("sub $t4, $t4, 1\n");
+     build.append("sb $t4, stackoffset\n");
+     build.append("la $t3, stackframe\n");
+     build.append("add $t3, $t3, $t4\n");
+     build.append("lw $31, 0($t3)\n");
+     
+     build.append("jr $31\n");
+   }
  }
  public void changeRoutineState(boolean t){
    routine = t;

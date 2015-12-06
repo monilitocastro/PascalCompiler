@@ -6,9 +6,17 @@ order3:	.word		0
 ascii5:	.asciiz		"Please enter order of fibonacci sequence: "
 ascii6:	.asciiz		"The fibonacci number you are looking for is "
 ascii7:	.asciiz		".  Good bye!"
+stackframe:  .space    500
+stackoffset: .word 0
 .text
 j start
 labelfibonacci:
+la $t3, stackframe
+lb $t4, stackoffset
+add $t3, $t3, $t4
+sw $31, 0($t3)
+add $t4, $t4, 1
+sb $t4, stackoffset
 lw $t0, a0
 			#pushByte
 addi $sp, $sp, -4
@@ -74,6 +82,12 @@ sub $t0, $t0, $t1
 bltz $t0, NOTIF4
 jal labelfibonacci
 NOTIF4:
+lb $t4, stackoffset
+sub $t4, $t4, 1
+sb $t4, stackoffset
+la $t3, stackframe
+add $t3, $t3, $t4
+lw $31, 0($t3)
 jr $31
 start:
 li $v0, 4
