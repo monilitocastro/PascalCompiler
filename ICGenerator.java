@@ -29,7 +29,7 @@ public class ICGenerator{
   * 
   */
  public void callProcedure(String name){
-   build.append("jal "+name+"\n");
+   build.append("jal label"+name+"\n");
  }
  /*
   * This method inserts a named label so that mips could jump to section. 

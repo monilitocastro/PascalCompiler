@@ -1,0 +1,3 @@
+rm *.class
+javac PascalCompiler.java
+java PascalCompiler fibonacci.pas fibonacciprogram.asm
