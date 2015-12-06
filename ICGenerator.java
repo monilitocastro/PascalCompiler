@@ -38,18 +38,18 @@ public class ICGenerator{
  public void addAddressLabel(String labelName){
    if(endingLabel.equals(labelName)){
      routine = false;
-     build.append("start:\n");
+     build.append("start:\t\t#START\n");
      return;
    }
    endingLabel = labelName;
-   build.append("label"+labelName+":\n");
+   build.append("label"+labelName+":\t\t#start of PROCEDURE\n");
    //push $31 into stackframe and increment stackoffset
    build.append("la $t3, stackframe\n");
-   build.append("lb $t4, stackoffset\n");
+   build.append("lw $t4, stackoffset\n");
    build.append("add $t3, $t3, $t4\n");
    build.append("sw $31, 0($t3)\n");
-   build.append("add $t4, $t4, 1\n");
-   build.append("sb $t4, stackoffset\n");
+   build.append("add $t4, $t4, 4\n");
+   build.append("sw $t4, stackoffset\n");
  }
  /**
  * This method will return the assembly code representation of the
@@ -58,7 +58,7 @@ public class ICGenerator{
  */
 
  public String compile(){
-  dataBuild.append("stackframe:  .space    500\nstackoffset: .word 0\n");   //bytesize elements
+  dataBuild.append("stackframe:  .word    400\nstackoffset: .word 0\n");   //bytesize elements
   dataBuild.append(build.toString());
   return dataBuild.toString();
  }
@@ -113,17 +113,17 @@ public class ICGenerator{
  public String compare(String compCommand){
   popSelectByte(1);
   popSelectByte(0);
-  build.append("\t\t\t#compare\n");
-  build.append(String.format("sub $t0, $t0, $t1\n") );
+  build.append("\t\t\t#COMPARISON\n");
   String name = genRAMaddr("NOTIF");
-  build.append(compCommand + " $t0, " +name +"\n");
+  build.append(String.format(compCommand+" $t0, $t1, "+name+"\n") );
+  
   //pushSelectByte(0);
   
   return name;
  }
  
  public void not_if(String name){
-   build.append(name+":\n");
+   build.append(name+":\t\t#NOT IF\n");
  }
  public void writeString(){
   build.append(String.format("li $v0, 4\nla $a0, %s\nsyscall\n", lastStringCreated));
@@ -165,9 +165,9 @@ public class ICGenerator{
  }
  public void notInSubRoutine(){  
    if(routine){
-     build.append("lb $t4, stackoffset\n");
-     build.append("sub $t4, $t4, 1\n");
-     build.append("sb $t4, stackoffset\n");
+     build.append("lw $t4, stackoffset\t\t#end of PROCEDURE\n");
+     build.append("sub $t4, $t4, 4\n");
+     build.append("sw $t4, stackoffset\n");
      build.append("la $t3, stackframe\n");
      build.append("add $t3, $t3, $t4\n");
      build.append("lw $31, 0($t3)\n");
