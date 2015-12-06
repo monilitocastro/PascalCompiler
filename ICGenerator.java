@@ -114,7 +114,7 @@ public class ICGenerator{
   popSelectByte(1);
   popSelectByte(0);
   build.append("\t\t\t#COMPARISON\n");
-  String name = genRAMaddr("NOTIF");
+  String name = genRAMaddr("NOT_IF");
   build.append(String.format(compCommand+" $t0, $t1, "+name+"\n") );
   
   //pushSelectByte(0);
