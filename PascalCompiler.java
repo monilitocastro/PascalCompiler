@@ -7,6 +7,7 @@
 * @author: Monilito Castro
 * @version 2.0 Build 2 November 10, 2015
 */ 
+import java.io.*;
 public class PascalCompiler{
  private static Lexer lex;
  private static Parser parser;
@@ -42,6 +43,30 @@ public class PascalCompiler{
    System.exit(-1);
   }
   parser.parse();
-  System.out.println("\n"+icg.compile());
+  
+  write(args[1], icg.compile());
  }
+ public static void write(String filename, String content) {
+        BufferedWriter writer = null;
+        try {
+            //create a temporary file
+            //String timeLog = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+            File file = new File(filename);
+
+            // This will output the full path where the file will be written to...
+            //System.out.println(logFile.getCanonicalPath());
+
+            writer = new BufferedWriter(new FileWriter(file));
+            writer.write(content);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Close the writer regardless of what happens...
+                writer.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+ 
 }

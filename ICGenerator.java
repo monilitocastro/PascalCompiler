@@ -153,7 +153,7 @@ public class ICGenerator{
   dataBuild.append(String.format(".data\n"));
  } 
  public void dotText(){
-  build.append(String.format(".text\njump start\n"));
+  build.append(String.format(".text\nj start\n"));
  }
  public void notInSubRoutine(){
   if(routine)build.append("jr $31\n");
