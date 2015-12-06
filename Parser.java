@@ -77,22 +77,22 @@ public class Parser{
       icg.not_if(condStack.pop() );
     }else if(emitterCommand.equals("@FL_EQ") ){
       latestLHSVar = latestPopRegex;
-      brComp = "beq";
+      brComp = "bneq";
     }else if(emitterCommand.equals("@FL_NEQ") ){
       latestLHSVar = latestPopRegex;
-      brComp = "bne";
+      brComp = "beq";
     }else if(emitterCommand.equals("@FL_L") ){
       latestLHSVar = latestPopRegex;
-      brComp = "blt";
+      brComp = "bge";
     }else if(emitterCommand.equals("@FL_LEQ") ){
       latestLHSVar = latestPopRegex;
-      brComp = "ble";
+      brComp = "bgt";
     }else if(emitterCommand.equals("@FL_GE") ){
       latestLHSVar = latestPopRegex;
-      brComp = "bge";
+      brComp = "blt";
     }else if(emitterCommand.equals("@FL_G") ){
       latestLHSVar = latestPopRegex;
-      brComp = "bgt";
+      brComp = "ble";
     }else if(emitterCommand.equals("@VARDECLARE")){
      listOfVar.add(latestPopRegex);
     }else if(emitterCommand.equals("@PROCEDURE_ID_DECLARED")){

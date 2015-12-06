@@ -54,7 +54,7 @@ addi $sp, $sp, 4
 lw $t0, 0($sp)
 addi $sp, $sp, 4
 			#COMPARISON
-bgt $t0, $t1, NOT_IF3
+ble $t0, $t1, NOT_IF3
 jal labelfibonacci
 NOT_IF3:		#NOT IF
 lw $t4, stackoffset		#end of PROCEDURE
