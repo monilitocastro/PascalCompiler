@@ -43,6 +43,10 @@ lw $t0, order1
 			#pushByte
 addi $sp, $sp, -4
 sw $t0, 0($sp)
+li $t0, 6
+ 			#pushByte
+addi $sp, $sp, -4
+sw $t0, 0($sp)
 			#popSelectByte(1)
 lw $t1, 0($sp)
 addi $sp, $sp, 4
@@ -61,7 +65,7 @@ add $t3, $t3, $t4
 lw $31, 0($t3)
 jr $31
 start:		#START
-li $t0, 3
+li $t0, 9
  			#pushByte
 addi $sp, $sp, -4
 sw $t0, 0($sp)

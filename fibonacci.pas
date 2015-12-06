@@ -4,9 +4,9 @@ procedure fibonacci;
   Begin
    Write("order is ", order);
    order := order - 1;
-   if(order > 1) then call fibonacci
+   if(order > 6) then call fibonacci
   End;
 Begin
-  order := 3;
+  order := 9;
   call fibonacci
 End.

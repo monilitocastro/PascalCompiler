@@ -1,13 +1,12 @@
-program FibProgram
-  a, b, c, order : Integer;
-procedure FibInit
+program FibProgram;
+  Var c, order : Integer;
+procedure fibonacci;
   Begin
-  Write("Please enter order of fibonacci sequence: ");
-  Read(order);
-  a := 1;
-  b := 1;
-  call fibonacci;
-  End
-procedure fibonacci
-    Begin
-    
+   Write("order is ", order);
+   order := order - 1;
+   if(order > 1) then call fibonacci
+  End;
+Begin
+  order := 3;
+  call fibonacci
+End.
