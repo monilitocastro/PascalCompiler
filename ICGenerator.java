@@ -58,7 +58,7 @@ public class ICGenerator{
  */
 
  public String compile(){
-  dataBuild.append("stackframe:  .word    400\nstackoffset: .word 0\n");   //bytesize elements
+  dataBuild.append("stackframe:  .word    0:400\nstackoffset: .word 0:1\n");   //bytesize elements
   dataBuild.append(build.toString());
   return dataBuild.toString();
  }

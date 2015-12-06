@@ -2,8 +2,8 @@
 c0:	.word		0
 order1:	.word		0
 ascii2:	.asciiz		"order is "
-stackframe:  .word    400
-stackoffset: .word 0
+stackframe:  .word    0:400
+stackoffset: .word 0:1
 .text
 j start
 labelfibonacci:		#start of PROCEDURE
