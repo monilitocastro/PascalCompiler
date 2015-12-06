@@ -102,6 +102,21 @@ public class ICGenerator{
   return null;
  }
 
+ public String compare(String compCommand){
+  popSelectByte(1);
+  popSelectByte(0);
+  build.append("\t\t\t#compare\n");
+  build.append(String.format("sub $t0, $t0, $t1\n") );
+  String name = genRAMaddr("NOTIF");
+  build.append(compCommand + " $t0, " +name +"\n");
+  //pushSelectByte(0);
+  
+  return name;
+ }
+ 
+ public void not_if(String name){
+   build.append(name+":\n");
+ }
  public void writeString(){
   build.append(String.format("li $v0, 4\nla $a0, %s\nsyscall\n", lastStringCreated));
  }

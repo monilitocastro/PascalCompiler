@@ -15,6 +15,7 @@ import java.util.Hashtable;
 
 public class Parser{
  private Stack<String> stack;
+ private Stack<String> condStack;
  private PredictTable prTable;
  private ArrayList<String> listOfProc = new ArrayList<String>();
  private ArrayList<String> arrTerminals;
@@ -25,10 +26,12 @@ public class Parser{
   lex = l;
   icg = i;
   stack = new Stack<String>();
+  condStack = new Stack<String>();
   arrTerminals = new ArrayList<String>();
   prTable = new PredictTable();
   addAllTerminals();
   stack.push("$");
+  condStack.push("$");
   stack.push("<program>");
   symbolTable = lex.getSymbolTable();
   //if(lex.hasNext())stack.push(lex.nextToken().token);
@@ -68,17 +71,27 @@ public class Parser{
     if(emitterCommand.equals("@DOTDATA")){
      icg.dotData();
      listOfProc = new ArrayList<String>();
+    }else if(emitterCommand.equals("@IF_EXPRESSION") ){
+      condStack.push(icg.compare(brComp));
+    }else if(emitterCommand.equals("@NOTIF") ){
+      icg.not_if(condStack.pop() );
     }else if(emitterCommand.equals("@FL_EQ") ){
-      brComp = "beq";
+      latestLHSVar = latestPopRegex;
+      brComp = "beqz";
     }else if(emitterCommand.equals("@FL_NEQ") ){
-      brComp = "bne";
+      latestLHSVar = latestPopRegex;
+      brComp = "bnez";
     }else if(emitterCommand.equals("@FL_L") ){
+      latestLHSVar = latestPopRegex;
       brComp = "bltz";
     }else if(emitterCommand.equals("@FL_LEQ") ){
+      latestLHSVar = latestPopRegex;
       brComp = "blez";
     }else if(emitterCommand.equals("@FL_GE") ){
+      latestLHSVar = latestPopRegex;
       brComp = "bgez";
     }else if(emitterCommand.equals("@FL_G") ){
+      latestLHSVar = latestPopRegex;
       brComp = "bgtz";
     }else if(emitterCommand.equals("@VARDECLARE")){
      listOfVar.add(latestPopRegex);

@@ -4,3 +4,5 @@ bin
 *.class~
 *.mips
 *.mips~
+Mars.jar
+mips*.asm
