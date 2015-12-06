@@ -1,12 +1,19 @@
 program FibProgram;
-  Var c, order : Integer;
+  Var a, b, c, order : Integer;
 procedure fibonacci;
   Begin
-   Write("order is ", order);
+   c := a + b;
+   a := b;
+   b := c;
    order := order - 1;
-   if(order > 6) then call fibonacci
+   if(order = 0) then call fibonacci
   End;
 Begin
-  order := 9;
-  call fibonacci
+  Write("Please enter order of fibonacci sequence: ");
+  Read(order);
+  a := 1;
+  b := 1;
+  call fibonacci;
+  Write("The fibonacci number you are looking for is ", c);
+  Write(".  Good bye!")
 End.

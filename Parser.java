@@ -77,7 +77,7 @@ public class Parser{
       icg.not_if(condStack.pop() );
     }else if(emitterCommand.equals("@FL_EQ") ){
       latestLHSVar = latestPopRegex;
-      brComp = "bneq";
+      brComp = "bne";
     }else if(emitterCommand.equals("@FL_NEQ") ){
       latestLHSVar = latestPopRegex;
       brComp = "beq";
