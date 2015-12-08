@@ -10,6 +10,8 @@ public class SymbolAttributes{
    public int tokenIndex = -1;
    public int tokenListStart= -1;
    public int tokenListEnd= -1;
+   public int lbound=-1; 	//for array types
+   public int rbound=-1;
    public String memAddress;
    public String toString(){
     StringBuilder build = new StringBuilder();

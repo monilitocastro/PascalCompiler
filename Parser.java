@@ -2,7 +2,8 @@
 * This class is sandwiched between the Lexer and ICGenerator.
 * It is a LL(1) Parser and so keeps a PredictTable for the
 * predict set. It has references to the Lexer, which has the
-* symbol table, and the intermediate code generator.
+* symbol table, and the intermediate code generator. The
+* TokenElement.regex keeps an image of the tokenized substring
 * 
 *@author: Monilito Castro
 *@version 2.0 Build 2 November 10, 2015
@@ -12,6 +13,7 @@ import java.util.Stack;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 public class Parser{
  private Stack<String> stack;
@@ -53,7 +55,10 @@ public class Parser{
   String brComp ="";
   boolean dotTextAlready = false;
   boolean blInsideProcedure = true;
+  boolean blInsideArray = false;
   String latestPopRegex = "";
+  String rBound = "";
+  String lBound = "";
   String latestID = "";
   String latestLHSVar = "";
   String emitterCommand;
@@ -73,6 +78,34 @@ public class Parser{
      listOfProc = new ArrayList<String>();
     }else if(emitterCommand.equals("@IF_EXPRESSION") ){
       condStack.push(icg.compare(brComp));
+    }else if(emitterCommand.equals("@ARRAYDECLARE") ){
+     //listOfVar.add(latestPopRegex);
+     String simpletypetemp = tokenElement.regex;
+     Object[] list = listOfVar.toArray();
+     for(Object item: list){
+      //System.out.println("item in listOfVar: "+(String)item);
+      //icg.dataInteger((String)item);
+      //symbolTable.get((String)item).rbound = Integer.parseInt(rBound);
+      //symbolTable.get((String)item).lbound = Integer.parseInt(lBound);
+      Iterator<SymbolAttributes> itSa = symbolTable.get((String)item).iterator();
+      while(itSa.hasNext() ){
+      	SymbolAttributes sa = itSa.next();
+      	System.out.println("####5################################################## "+sa.optionalImage+" type="+sa.tokenType);
+      	if(!sa.tokenType.equals("INT_ARRAY_ID") & !sa.tokenType.equals("CHAR_ARRAY_ID") )continue;
+      	sa.rbound = Integer.parseInt(rBound);
+      	sa.lbound = Integer.parseInt(lBound);
+      	icg.dataArray(sa);
+      }
+     }
+     listOfVar = new ArrayList<String>();
+     //toggle isInsideArray
+     blInsideArray = false;
+    }else if(emitterCommand.equals("@LBOUND") ){
+      //assumes that the only things that use @LBOUND are array statements
+      blInsideArray = true;
+      lBound = tokenElement.regex;
+    }else if(emitterCommand.equals("@RBOUND") ){
+      rBound = tokenElement.regex;
     }else if(emitterCommand.equals("@NOTIF") ){
       icg.not_if(condStack.pop() );
     }else if(emitterCommand.equals("@FL_EQ") ){
@@ -100,12 +133,15 @@ public class Parser{
      listOfProc.add(latestPopRegex);
      blInsideProcedure = true;
     }else if(emitterCommand.equals("@INTDECLARE")){
-     Object[] list = listOfVar.toArray();
-     for(Object item: list){
+     if(!blInsideArray){
+      Object[] list = listOfVar.toArray();
+      for(Object item: list){
       //System.out.println("item in listOfVar: "+(String)item);
       icg.dataInteger((String)item);
+      }
+      listOfVar = new ArrayList<String>();
      }
-     listOfVar = new ArrayList<String>();
+     
     }else if(emitterCommand.equals("@DOTTEXT")){
       if(!dotTextAlready){
         dotTextAlready=true;

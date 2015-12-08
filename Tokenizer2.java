@@ -25,6 +25,7 @@ public class Tokenizer2 {
  private boolean isImmAfterFuncTkn = false;
  private boolean isImmAfterProgram = false;
  private boolean isAssigningValue = false;
+ private boolean isArray = false;
  private String lastID = "";
  private StringBuilder postLexBuilder;
 
@@ -113,7 +114,11 @@ public class Tokenizer2 {
     if((image.equals("Integer") || image.equals("integer")) && isInsideVarDecl  ){
      //do everything here before turning off isInsideVarDecl
      //System.out.println("****************PARSER POST IMAGE*********");
-     assignAllSymbolStack("INTEGER_ID");
+     if(isArray){
+     	     assignAllSymbolStack("INTEGER_ARRAY_ID");
+     }else{
+     	assignAllSymbolStack("INTEGER_ID");
+     }
      isInsideVarDecl = false;
     }
     if((image.equals("String") || image.equals("string")) && isInsideVarDecl ){
@@ -121,7 +126,11 @@ public class Tokenizer2 {
      isInsideVarDecl = false;
     }
     if((image.equals("Char") || image.equals("char")) && isInsideVarDecl ){
-     assignAllSymbolStack("CHAR_ID");
+     if(isArray){
+       assignAllSymbolStack("CHAR_ARRAY_ID");
+     }else{
+     	assignAllSymbolStack("CHAR_ID");
+     }
      isInsideVarDecl = false;
     }
     if(image.equals(":=")){
@@ -140,6 +149,9 @@ public class Tokenizer2 {
     }
     if(image.equals("Program") || image.equals("program") ){
      isImmAfterProgram = true;
+    }
+    if(image.equals("Array") || image.equals("array") ){
+     isArray = true;
     }
 
 

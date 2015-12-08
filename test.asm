@@ -1,7 +1,6 @@
 .data
 a0:	.word		0
-arr1:	.word		0
-ascii2:	.asciiz		"10 + 2 - 10 * 3 + 5 div 2 = "
+ascii1:	.asciiz		"10 + 2 - 10 * 3 + 5 div 2 = "
 stackframe:  .word    0:400
 stackoffset: .word 0:1
 .text
@@ -84,7 +83,7 @@ addi $sp, $sp, -4
 sw $t0, 0($sp)
 sw $t0, a0
 li $v0, 4
-la $a0, ascii2
+la $a0, ascii1
 syscall
 li $v0, 1
 lw $a0, a0

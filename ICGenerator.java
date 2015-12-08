@@ -106,7 +106,7 @@ public class ICGenerator{
     }
    }
   }
-  System.out.println("ERROR: ICGenerator doesn't have " + name + "token.");
+  System.out.println("ERROR: ICGenerator doesn't have " + name + " token.");
   return null;
  }
 
@@ -142,7 +142,11 @@ public class ICGenerator{
   String memAddr = getVariableAttribute(name).memAddress;
   build.append(String.format("li $v0,5\nsyscall\nsw $v0, %s\n", memAddr));
  }
-
+ 
+ public void dataArray(SymbolAttributes sa){
+ 	System.out.println("#########################################"+sa.toString()+" lbound="+sa.lbound+ " rbound="+sa.rbound);
+ }
+ 
  public void dataString(String str){
   String ascii = "ascii";
   String var = lastStringCreated = genRAMaddr(ascii);
