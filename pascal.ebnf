@@ -7,8 +7,9 @@
 <variable_declaration>,<ID>,<ID>,@VARDECLARE,<id_comma_atom>,<COLON>,<type>
 <id_comma_atom>,<COMMA>,<COMMA>,<ID>,@VARDECLARE,<id_comma_atom>
 <type>,<INTEGER>,<simple_type>
-<type>,<CHAR>,<simple_type>,
-<type>,<array_type>,<array_type>
+<type>,<CHAR>,<simple_type>
+<type>,<ARRAY>,<array_type>
+<array_type>,<ARRAY>,<ARRAY>,<LBRACK>,<index_range>,<RBRACK>,<OF>,<simple_type>
 <simple_type>,<INTEGER>,<INTEGER>,@INTDECLARE
 <simple_type>,<CHAR>,<CHAR>
 <procedure_declaration_part>,<PROCEDURE>,<procedure_declaration>,<SEMICOLON>,<procedure_declaration_part>
