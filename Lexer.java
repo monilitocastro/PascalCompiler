@@ -45,7 +45,7 @@ public class Lexer {
  public void InitTokenizing(String s2){
   _tokenizer = new Tokenizer2(s2);
   _tokenizer.addPattern("(A|a)nd", "<AND>");
-  _tokenizer.addPattern("(A|a)rray", "<Array>");
+  _tokenizer.addPattern("(A|a)rray", "<ARRAY>");
   _tokenizer.addPattern("(B|b)egin", "<BEGIN>");
   _tokenizer.addPattern("(C|c)har", "<CHAR>");
   _tokenizer.addPattern("(C|c)hr", "<CHR>");

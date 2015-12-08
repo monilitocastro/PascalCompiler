@@ -51,3 +51,5 @@
 <adding_operator_atom>,<EQUAL>
 <adding_operator_atom>,<DO>
 <adding_operator_atom>,<THEN>
+<procedure_declaration_part>,<PERIOD>
+<statement_part>,<PERIOD>

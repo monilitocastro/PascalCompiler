@@ -276,7 +276,7 @@ public class Parser{
  */
  private void addAllTerminals(){
   arrTerminals.add("<AND>");
-  arrTerminals.add("<Array>");
+  arrTerminals.add("<ARRAY>");
   arrTerminals.add("<BEGIN>");
   arrTerminals.add("<CHAR>");
   arrTerminals.add("<CHR>");
@@ -318,6 +318,7 @@ public class Parser{
   arrTerminals.add("<COMMA>");
   arrTerminals.add("<LPAREN>");
   arrTerminals.add("<LBRACK>");
+  arrTerminals.add("<RANGE_OP>");
   arrTerminals.add("<RPAREN>");
   arrTerminals.add("<RBRACK>");
   arrTerminals.add("<PERIOD>");
