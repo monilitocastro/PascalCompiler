@@ -9,7 +9,7 @@
 <type>,<INTEGER>,<simple_type>
 <type>,<CHAR>,<simple_type>
 <type>,<ARRAY>,<array_type>
-<array_type>,<ARRAY>,<ARRAY>,@ARRAYDECLARE,<LBRACK>,<index_range>,<RBRACK>,<OF>,<simple_type>
+<array_type>,<ARRAY>,<ARRAY>,<LBRACK>,<index_range>,<RBRACK>,<OF>,<simple_type>,@ARRAYDECLARE
 <index_range>,<NUMBER>,<NUMBER>,@LBOUND,<RANGE_OP>,<NUMBER>,@RBOUND
 <simple_type>,<INTEGER>,<INTEGER>,@INTDECLARE
 <simple_type>,<CHAR>,<CHAR>

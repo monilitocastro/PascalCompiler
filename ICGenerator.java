@@ -144,7 +144,10 @@ public class ICGenerator{
  }
  
  public void dataArray(SymbolAttributes sa){
- 	System.out.println("#########################################"+sa.toString()+" lbound="+sa.lbound+ " rbound="+sa.rbound);
+ 	//System.out.println("#########################################"+sa.toString()+" lbound="+sa.lbound+ " rbound="+sa.rbound);
+ 	String id = genRAMaddr("array_"+sa.optionalImage);
+ 	sa.memAddress = id;
+ 	dataBuild.append(String.format("%s:\t.word\t\t0:%d\n", id, sa.rbound-sa.lbound) );
  }
  
  public void dataString(String str){
