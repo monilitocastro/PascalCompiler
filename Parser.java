@@ -83,17 +83,12 @@ public class Parser{
      String simpletypetemp = tokenElement.regex;
      Object[] list = listOfVar.toArray();
      for(Object item: list){
-      //System.out.println("item in listOfVar: "+(String)item);
-      //icg.dataInteger((String)item);
-      //symbolTable.get((String)item).rbound = Integer.parseInt(rBound);
-      //symbolTable.get((String)item).lbound = Integer.parseInt(lBound);
       Iterator<SymbolAttributes> itSa = symbolTable.get((String)item).iterator();
       while(itSa.hasNext() ){
       	SymbolAttributes sa = itSa.next();
       	
       	if(sa.tokenType.equals("INTEGER_ARRAY_ID") | sa.tokenType.equals("CHAR_ARRAY_ID") ){
-      	//System.out.println("####5################################################## "+sa.optionalImage+" type="+sa.tokenType +" lBound="+lBound + " rBound="+rBound);
-      	      	sa.rbound = Integer.parseInt(rBound);
+      	      sa.rbound = Integer.parseInt(rBound);
       		sa.lbound = Integer.parseInt(lBound);
       		icg.dataArray(sa);
       	}
@@ -108,7 +103,7 @@ public class Parser{
       //assumes that the only things that use @LBOUND are array statements
       blInsideArray = true;
       lBound = tokenElement.regex;
-      //System.out.println("###########################################################lBound"+lBound);
+
     }else if(emitterCommand.equals("@RBOUND") ){
       rBound = tokenElement.regex;
     }else if(emitterCommand.equals("@NOTIF") ){

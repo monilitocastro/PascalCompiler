@@ -1,5 +1,6 @@
 Program temperatureUnit;
 Var f, result ,a,b,c,z: Integer;
+Var myarray : Array [1 .. 9] of Integer;
 Procedure proc1;
   Begin
    Write("Proc 1 called.")
@@ -12,6 +13,7 @@ Begin
 Write("Please enter the degrees in Fahrenheit: ");
 Read(f);
 result := (f - 32) div 2;
+myarray[2] := 99;
 call proc2;
 Write("Celsius is ", result);
 a :=3;
