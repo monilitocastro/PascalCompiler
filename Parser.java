@@ -56,6 +56,7 @@ public class Parser{
   boolean dotTextAlready = false;
   boolean blInsideProcedure = true;
   boolean blInsideArray = false;
+  boolean blassignmentHasArray = false;
   String latestPopRegex = "";
   String rBound = "";
   String lBound = "";
@@ -73,9 +74,14 @@ public class Parser{
     //This if case will emit on pop
     System.out.println("**************"+emitterCommand+"************");
     stack.pop();
+    //USE THIS -------> elseif(emitterCommand.equals("") ){}
+    
     if(emitterCommand.equals("@DOTDATA")){
      icg.dotData();
      listOfProc = new ArrayList<String>();
+    }elseif(emitterCommand.equals("@ARRAY_ASSIGN") ){
+      int tokenArrIndex = Integer.parseInt(tokenElement.regex);
+      getArrayFromSymbolTable(latestID, tokenArrIndex);
     }else if(emitterCommand.equals("@IF_EXPRESSION") ){
       condStack.push(icg.compare(brComp));
     }else if(emitterCommand.equals("@ARRAYDECLARE") ){
@@ -292,7 +298,22 @@ public class Parser{
   }
   return false;
  }
- 
+ /**
+ *
+ * This methods get a unique array id from symbol table. Picks first one if there
+ * are many.
+ *
+ */
+ private String getArrayFromSymbolTable(String latestID, int tokenArrIndex){
+      Iterator<String> itS = symbolTable.get(latestID).iterator();
+      while(itS.hasNext() ){
+            SymbolAttributes sa = itS.next();
+            if(sa.optionalImage.equals(latestID) ){
+                  
+            }
+      }
+ }
+
  /**
   * This method determines whether or not a LHS variable is a procedure.
   * If so then we ask icg to jump to procedure code
