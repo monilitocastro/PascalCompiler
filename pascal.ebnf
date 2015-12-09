@@ -35,9 +35,9 @@
 <mult_operator_atom>,<LESSEQUAL>,<LESSEQUAL>,<NUMBER>,@CONSTANTNUMBER,@FL_LEQ,<RPAREN>
 <mult_operator_atom>,<GREATEQUAL>,<GREATEQUAL>,<NUMBER>,@CONSTANTNUMBER,@FL_GE,<RPAREN>
 <mult_operator_atom>,<GREATER>,<GREATER>,<NUMBER>,@CONSTANTNUMBER,@FL_G,<RPAREN>
-<assignment_statement>,<ID>,<variable>,<assignment_statement2>
+<assignment_statement>,<ID>,@MARKLHSVAR,<variable>,<assignment_statement2>
 <assignment_statement2>,<ASSIGN>,@LHSVARIABLE,<ASSIGN>,<simple_expression>,<simple_expression_atom>,@STORE
-<assignment_statement2>,<LBRACK>,<LBRACK>,<NUMBER>,@ARRAY_ASSIGN,<RBRACK>,@LHSVARIABLE,<ASSIGN>,<simple_expression>,<simple_expression_atom>,@STORE
+<assignment_statement2>,<LBRACK>,<LBRACK>,@ARRAY_ASSIGN,<NUMBER>,<RBRACK>,@LHSVARIABLE,<ASSIGN>,<simple_expression>,<simple_expression_atom>,@STORE
 <simple_expression_atom>,<EQUAL>,<relational_operator>,<simple_expression>,@FL_EQ
 <simple_expression_atom>,<NOT_EQUAL>,<relational_operator>,<simple_expression>,@FL_NEQ
 <simple_expression_atom>,<LESS>,<relational_operator>,<simple_expression>,@FL_L

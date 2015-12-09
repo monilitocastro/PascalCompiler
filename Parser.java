@@ -57,6 +57,9 @@ public class Parser{
   boolean blInsideProcedure = true;
   boolean blInsideArray = false;
   boolean blassignmentHasArray = false;
+  String strIndex = "";
+  int arrIndex = -1;
+  String latestArrayVar = "";
   String latestPopRegex = "";
   String rBound = "";
   String lBound = "";
@@ -74,32 +77,36 @@ public class Parser{
     //This if case will emit on pop
     System.out.println("**************"+emitterCommand+"************");
     stack.pop();
-    //USE THIS -------> elseif(emitterCommand.equals("") ){}
+    //USE THIS -------> else if(emitterCommand.equals("") ){}
     
     if(emitterCommand.equals("@DOTDATA")){
      icg.dotData();
      listOfProc = new ArrayList<String>();
-    }elseif(emitterCommand.equals("@ARRAY_ASSIGN") ){
-      int tokenArrIndex = Integer.parseInt(tokenElement.regex);
-      getArrayFromSymbolTable(latestID, tokenArrIndex);
+    }else if(emitterCommand.equals("@MARKLHSVAR") ){
+      latestArrayVar = tokenElement.regex;
+    }else if(emitterCommand.equals("@ARRAY_ASSIGN") ){
+      int tokenArrIndex = Integer.parseInt(tokenElement.regex.trim() );
+      //System.out.println("****************"+ latestArrayVar);
+      strIndex = tokenElement.regex;
+      arrIndex = Integer.parseInt(strIndex);
+      String arrayMemAddr = getArrayFromSymbolTable(latestArrayVar, tokenArrIndex);
+      icg.loadVariableArray(latestID, arrayMemAddr, strIndex );
+      System.out.println("****************"+latestID +"******"+tokenElement.regex);
+      blassignmentHasArray = true;
     }else if(emitterCommand.equals("@IF_EXPRESSION") ){
       condStack.push(icg.compare(brComp));
     }else if(emitterCommand.equals("@ARRAYDECLARE") ){
-     //listOfVar.add(latestPopRegex);
      String simpletypetemp = tokenElement.regex;
      Object[] list = listOfVar.toArray();
      for(Object item: list){
       Iterator<SymbolAttributes> itSa = symbolTable.get((String)item).iterator();
       while(itSa.hasNext() ){
       	SymbolAttributes sa = itSa.next();
-      	
       	if(sa.tokenType.equals("INTEGER_ARRAY_ID") | sa.tokenType.equals("CHAR_ARRAY_ID") ){
       	      sa.rbound = Integer.parseInt(rBound);
       		sa.lbound = Integer.parseInt(lBound);
       		icg.dataArray(sa);
       	}
-      	
-
       }
      }
      listOfVar = new ArrayList<String>();
@@ -111,6 +118,7 @@ public class Parser{
       lBound = tokenElement.regex;
 
     }else if(emitterCommand.equals("@RBOUND") ){
+
       rBound = tokenElement.regex;
     }else if(emitterCommand.equals("@NOTIF") ){
       icg.not_if(condStack.pop() );
@@ -180,7 +188,12 @@ public class Parser{
     }else if(emitterCommand.equals("@SUBTRACT")){
      icg.subtract();
     }else if(emitterCommand.equals("@STORE")){
-     icg.storeByte(latestLHSVar);
+     if(!blassignmentHasArray){
+      icg.storeByte(latestLHSVar);
+     }else{
+      icg.storeArray(latestID, strIndex);
+      blassignmentHasArray = false;
+     }
     }else if(emitterCommand.equals("@LPAREN")){
      icg.pushByte();
     }else if(emitterCommand.equals("@RPAREN")){
@@ -305,14 +318,27 @@ public class Parser{
  *
  */
  private String getArrayFromSymbolTable(String latestID, int tokenArrIndex){
-      Iterator<String> itS = symbolTable.get(latestID).iterator();
-      while(itS.hasNext() ){
-            SymbolAttributes sa = itS.next();
+ System.out.println("****"+latestID);
+      Iterator<SymbolAttributes> itSa = (symbolTable.get(latestID)).iterator();
+      boolean isInTable = false;
+      int salbound, sarbound;
+      salbound=-1; sarbound=-1;
+      while(itSa.hasNext() ){
+            SymbolAttributes sa = itSa.next();
             if(sa.optionalImage.equals(latestID) ){
-                  
+                  isInTable = true;
+                  if( (sa.lbound <= tokenArrIndex ) & (tokenArrIndex <= sa.rbound) ){
+                        return sa.memAddress;
+                  }
             }
       }
- }
+      if(!isInTable){
+            System.out.println("Fatal Error: the identifier '"+latestID + "' is not in symbol table.");
+            System.exit(0);
+      }
+      System.out.println("Fatal Error: index at " + tokenArrIndex + " for '" + latestID + "' is out of range. Must be between " + salbound +" and "+ sarbound);
+      return null;
+}
 
  /**
   * This method determines whether or not a LHS variable is a procedure.

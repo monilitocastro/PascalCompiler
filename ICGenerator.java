@@ -103,6 +103,10 @@ public class ICGenerator{
     SymbolAttributes item = (SymbolAttributes)it.next();
     if(item.tokenType.equals("INTEGER_ID")){
      return item;
+    }else if(item.tokenType.equals("INTEGER_ARRAY_ID")){
+     return item;
+    }else if(item.tokenType.equals("INTEGER_CHAR_ID")){
+     return item;
     }
    }
   }
@@ -196,12 +200,26 @@ public class ICGenerator{
   build.append(String.format("lw $t0, %s\n", memAddr));
   pushByte();
  }
+ 
+ public void loadVariableArray(String name, String memAddr, String strIndex){
+  //String memAddr = getVariableAttribute(name).memAddress;
+  String adjIndex = getAdjustedArrayIndex(name, strIndex);
+  build.append(String.format("lw $t4, %s\n", memAddr) );
+  build.append(String.format("lw $t0, %s($t4)\t\t#loadVariableArray\n", adjIndex ) );
+  pushByte();
+ }
 
  public void storeByte(String name){
   String ram_dest = getVariableAttribute(name).memAddress;
   build.append(String.format("sw $t0, %s\n", ram_dest));
  }
 
+ public void storeArray(String name, String strIndex){
+  String ram_dest = getVariableAttribute(name).memAddress;
+  String adjIndex = getAdjustedArrayIndex(name, strIndex);
+  build.append(String.format("lw $t4, %s\n", ram_dest) );
+  build.append(String.format("sw $t0, %s($t4)\t\t#storeArray\n", adjIndex));
+ }
 
  public void loadImm(String value){
   build.append(String.format("li $t0, %s\n ", value));
@@ -267,7 +285,55 @@ public class ICGenerator{
   build.append(String.format("lw $t%d, 0($sp)\naddi $sp, $sp, 4\n",i));
 
  }
-
+ 
+ private String getAdjustedArrayIndex(String name, String index1){
+   int index = Integer.parseInt(index1);
+   SymbolAttributes item = null;
+   if(symbolTable.containsKey(name)){
+   LinkedList<SymbolAttributes> llAttr = symbolTable.get(name);
+   Iterator it = llAttr.iterator();
+   
+   while(it.hasNext()){
+    item = (SymbolAttributes)it.next();
+    if(item.tokenType.equals("INTEGER_ARRAY_ID")  | item.tokenType.equals("INTEGER_ARRAY_ID") ){
+     break;
+    }
+   }
+   }
+   int lb = item.lbound;
+   int rb = item.rbound;
+   if((lb <= index) & (index <= rb)){
+      StringBuilder b = new StringBuilder();
+      b.append(""+(index - lb));
+      return b.toString();
+   }else{
+      System.out.println("Fatal Error: array '"+name+"' index is out of bounds.");
+      System.exit(0);
+   }
+   
+   return null; 
+}
+ 
+ 
+ /*
+   if(symbolTable.containsKey(name)){
+   LinkedList<SymbolAttributes> llAttr = symbolTable.get(name);
+   Iterator it = llAttr.iterator();
+   
+   while(it.hasNext()){
+    SymbolAttributes item = (SymbolAttributes)it.next();
+    if(item.tokenType.equals("INTEGER_ID")){
+     return item;
+    }else if(item.tokenType.equals("INTEGER_ARRAY_ID")){
+     return item;
+    }else if(item.tokenType.equals("INTEGER_CHAR_ID")){
+     return item;
+    }
+   }
+  }
+  System.out.println("ERROR: ICGenerator doesn't have " + name + " token.");
+  return null;
+ */
 
 
 }

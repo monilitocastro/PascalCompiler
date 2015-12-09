@@ -92,6 +92,17 @@ mflo $t0
 addi $sp, $sp, -4
 sw $t0, 0($sp)
 sw $t0, result1
+lw $t4, array_myarray6
+lw $t0, 1($t4)		#loadVariableArray
+			#pushByte
+addi $sp, $sp, -4
+sw $t0, 0($sp)
+li $t0, 99
+ 			#pushByte
+addi $sp, $sp, -4
+sw $t0, 0($sp)
+lw $t4, array_myarray6
+sw $t0, 1($t4)		#storeArray
 jal labelproc2
 li $v0, 4
 la $a0, ascii10
