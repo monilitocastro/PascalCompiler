@@ -148,10 +148,10 @@ public class ICGenerator{
  }
  
  public void dataArray(SymbolAttributes sa){
-  String id = genRAMaddr("array_"+sa.optionalImage);
-  sa.memAddress = id;
-  //Since the range op a..b is inclusive there must be 1 more
-  dataBuild.append(String.format("%s:\t.word\t\t0:%d\n", id, ((sa.rbound-sa.lbound)+1) ) );
+ 	String id = genRAMaddr("array_"+sa.optionalImage);
+ 	sa.memAddress = id;
+ 	//Since the range op a..b is inclusive there must be 1 more
+ 	dataBuild.append(String.format("%s:\t.word\t\t0:%d\n", id, ((sa.rbound-sa.lbound)+1) ) );
  }
  
  public void dataString(String str){
@@ -195,34 +195,17 @@ public class ICGenerator{
   //pushByte();
  }
  
- public void arrayStore(){
-   
-   
-   build.append("\t\t#ARRAY STORE\n");
-   popByte();
-   build.append(String.format("sub $t0, $t0, %d\n", adjIndex ) );
-   build.append( "add $t0,$t0,$t0\nadd $t0,$t0,$t0\n" );
-   build.append(String.format("lw $t4, %s\n", memAddr) );
-   build.append("add $t4, $t4, $t0\n");
-   build.append("\t\t#END ARRAY STORE\n");
- }
- 
  public void loadVariable(String name){
   String memAddr = getVariableAttribute(name).memAddress;
   build.append(String.format("lw $t0, %s\n", memAddr));
   pushByte();
  }
  
- public void loadVariableArray(String memAddr){
+ public void loadVariableArray(String name, String memAddr, String strIndex){
   //String memAddr = getVariableAttribute(name).memAddress;
-  int adjIndex = getAdjustedArrayIndex(memAddr);
-  build.append("#start loadVariableArray\n");
-  popByte();
-  build.append(String.format("sub $t0, $t0, %d\n", adjIndex ) );
-  build.append( "add $t0,$t0,$t0\nadd $t0,$t0,$t0\n" );
+  String adjIndex = getAdjustedArrayIndex(name, strIndex);
   build.append(String.format("lw $t4, %s\n", memAddr) );
-  build.append("add $t4, $t4, $t0\n");
-  build.append(String.format("lw $t0, %s($t4)\t\t#end loadVariableArray\n", adjIndex ) );
+  build.append(String.format("lw $t0, %s($t4)\t\t#loadVariableArray\n", adjIndex ) );
   pushByte();
  }
 
@@ -233,10 +216,9 @@ public class ICGenerator{
 
  public void storeArray(String name, String strIndex){
   String ram_dest = getVariableAttribute(name).memAddress;
-  int adjIndex = getAdjustedArrayIndex(ram_dest);
-  int index = Integer.parseInt(strIndex);
+  String adjIndex = getAdjustedArrayIndex(name, strIndex);
   build.append(String.format("lw $t4, %s\n", ram_dest) );
-  build.append(String.format("sw $t0, %d($t4)\t\t#storeArray\n", index - adjIndex));
+  build.append(String.format("sw $t0, %s($t4)\t\t#storeArray\n", adjIndex));
  }
 
  public void loadImm(String value){
@@ -291,10 +273,6 @@ public class ICGenerator{
   build.append(String.format("lw $t0, 0($sp)\naddi $sp, $sp, 4\n"));
 
  }
- 
- public void incrementT0Word(){
-   build.append("add $t0, $t0, $t0\nadd $t0, $t0, $t0\n");
- }
 
  public void pushSelectByte(int i){
   build.append("\t\t\t#pushSelectByte("+i+")\n");
@@ -308,23 +286,32 @@ public class ICGenerator{
 
  }
  
- private int getAdjustedArrayIndex(String name){
+ private String getAdjustedArrayIndex(String name, String index1){
+   int index = Integer.parseInt(index1);
    SymbolAttributes item = null;
    if(symbolTable.containsKey(name)){
    LinkedList<SymbolAttributes> llAttr = symbolTable.get(name);
    Iterator it = llAttr.iterator();
    
-    while(it.hasNext()){
-      item = (SymbolAttributes)it.next();
-      //if(item.tokenType.equals("INTEGER_ARRAY_ID")  | item.tokenType.equals("INTEGER_ARRAY_ID") ){
-      // break;
-      //}
-      if(item.memAddress.equals(name) ){
-        break;
-      }
+   while(it.hasNext()){
+    item = (SymbolAttributes)it.next();
+    if(item.tokenType.equals("INTEGER_ARRAY_ID")  | item.tokenType.equals("INTEGER_ARRAY_ID") ){
+     break;
     }
    }
-   return item.lbound;
+   }
+   int lb = item.lbound;
+   int rb = item.rbound;
+   if((lb <= index) & (index <= rb)){
+      StringBuilder b = new StringBuilder();
+      b.append(""+(index - lb));
+      return b.toString();
+   }else{
+      System.out.println("Fatal Error: array '"+name+"' index is out of bounds.");
+      System.exit(0);
+   }
+   
+   return null; 
 }
  
  

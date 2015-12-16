@@ -1,3 +1,4 @@
+{THIS IS A COMMENT}
 Program temperatureUnit;
 Var f, result ,a,b,c,z: Integer;
 Var myarray : Array [1 .. 9] of Integer;
@@ -10,6 +11,8 @@ Procedure proc2;
     Write("Proc 2 is called.")
   End;
 Begin
+{* This part of the program will ask for Fahrenheit *}
+                                                   { * This is a consecutive comment  * }
 Write("Please enter the degrees in Fahrenheit: ");
 Read(f);
 result := (f - 32) div 2;

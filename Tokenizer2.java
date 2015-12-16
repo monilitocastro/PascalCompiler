@@ -97,7 +97,10 @@ public class Tokenizer2 {
      System.out.println("Warning: found string at first but lost it. Line 49 to 62 Tokenizer2 class");
      System.exit(-1);
     }
-    //System.out.println("IMAGES: "+image);
+    if(currBiggestPattern.token.equals("<COMMENT>") ){
+      return nextToken();
+    }
+    //System.out.println("curr: "+);
     elemToAdd = new TokenListElement(image, currBiggestPattern.token);
     if(!currBiggestPattern.token.equals("<COMMENT>")){tokenList.add( elemToAdd );}
     if(currBiggestPattern.token.equals("<ILLEGAL>")){postLexBuilder.append("ERROR: Illegal characters detected.\n");}
@@ -115,9 +118,9 @@ public class Tokenizer2 {
      //do everything here before turning off isInsideVarDecl
      //System.out.println("****************PARSER POST IMAGE*********");
      if(isArray){
-     	     assignAllSymbolStack("INTEGER_ARRAY_ID");
+           assignAllSymbolStack("INTEGER_ARRAY_ID");
      }else{
-     	assignAllSymbolStack("INTEGER_ID");
+      assignAllSymbolStack("INTEGER_ID");
      }
      isInsideVarDecl = false;
     }
@@ -129,7 +132,7 @@ public class Tokenizer2 {
      if(isArray){
        assignAllSymbolStack("CHAR_ARRAY_ID");
      }else{
-     	assignAllSymbolStack("CHAR_ID");
+      assignAllSymbolStack("CHAR_ID");
      }
      isInsideVarDecl = false;
     }
@@ -207,6 +210,11 @@ public class Tokenizer2 {
     }else{
      System.out.println("Warning: found string at first but lost it. Line 49 to 62 Tokenizer2 class");
      System.exit(-1);
+    }
+    //System.out.println("curr equals "+currBiggestPattern.token);
+    // System.exit(0);
+    if(currBiggestPattern.token.equals("<COMMENT>") ){
+      nextToken();
     }
     elemToAdd = new TokenListElement(image, currBiggestPattern.token);
     if(!currBiggestPattern.token.equals("<COMMENT>")){tokenList.add( elemToAdd );}
