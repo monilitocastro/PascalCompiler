@@ -1,0 +1,67 @@
+[33m65eff19[m TODO create transitions for variable specifying index for arrays.
+[33m021653f[m it seems to do array assignment well. TODO test array assignment or create array access in expressions (which may be needed by former experiment)
+[33m5bfc972[m TODO: getArrayFromSymbolTable in Parser.java
+[33m24e1d2f[m TODO set up the writing of information into array. currently error pops up about null pointer on ICGenerator.java:201
+[33mefc4666[m array creation in MIPS successful. TODO create array element read write code in Parser and ICGenerator
+[33m83e4d6a[m Parser now can decide that it is seeing an array. TODO create icg method to create data array
+[33m7ce77c5[m added empty transitions for procedure_declaration_part and statement_part
+[33m5653aae[m added <array_type> tags in pascal.ebnf
+[33m0eb5b06[m PascalCompiler is good for presentation. TODO program it for final delivery: need arrays, while loops, some type checking.
+[33m01113ed[m TODO stack frame implementation doesn't have depth. ends at first pop. fix it
+[33m834a2ea[m TODO: fix fibonacci number not correctly computing
+[33m1c596f4[m success: stack frame works
+[33mf28c640[m solution: intermediate code of comparisons is their 'not'.
+[33macdc0eb[m TODO remove jal and merge with comparison statements. remove generated not_if names
+[33mf5d5ddb[m inserted @CONSTANTNUMBER emitters before comparison emitters. need to test.
+[33mc2b4206[m TODO debug COMPARISON in icg generator
+[33m0f87021[m TODO fix instructions using stackoffset so that they use sw and lw rather than sb or lb.
+[33me6da3a3[m asm output success. TODO stack frame implementation: push, pop, .text-definition
+[33m0aa8555[m fixed the missing 'label' prefix in jal calls
+[33m4a30f8d[m TODO fix compare command not showing up.
+[33me31072d[m TODO implement @IF_EXPRESSION and @NOTIF
+[33m4869692[m done for the night. TODO: while statement using some modular assembly code so that if statements can reuse it too.
+[33mc8c40a6[m TODO while statement
+[33mde0a1cf[m when adding new terminal, search for <INTEGER> in all documents as an example on how to insert.
+[33me2e7486[m jr 1 added properly at end of each subroutine.
+[33mafaa7d5[m .text includes procedures now
+[33m01c832b[m @DOTTEXT appears once now.
+[33mbca0aa7[m procedure id are successfully added into listOfProc
+[33mea3a75a[m added listOfProc arraylist
+[33m6d52bf1[m added emitter @PROCEDURE_ID_DECLARED
+[33m11c8ea7[m finished adding arrays(read/write), procedures, if, while. Need to generate transitions and put into pascal2.ebnf and empty transitions ebnf file
+[33mbfdad29[m created else_atom to deal with <ELSE> statements
+[33m18e4f50[m inserted structured_statements: if...then and while...do
+[33m53cb73d[m changed <expression> to <simple_expression>
+[33m2a0d50a[m inserted procedure_identifier
+[33m08e33d5[m inserted indexed_variable into pascal2.ebnf
+[33m9887f93[m added RANGE_OP .. as token
+[33m38753cf[m merged manually
+[33m3aa5103[m weird
+[33mc4b036f[m Removed iteration in nextToken()
+[33m2be14ea[m Lexer not static. TODO create one-by-one just with global source object.
+[33m59e3053[m Futile
+[33mea4352d[m an attempt to convert Lexer.java to one-by-one tokenizer
+[33m414217c[m replaced Lexer.java with first delivery version. works.
+[33m76c0d2f[m just before checkout
+[33m10c4d7a[m TEST FAILED: Will not run pass 2nd token
+[33m845852f[m refactoring works for tokenizer. TODO: test case for nextToken
+[33mef3f806[m TODO: pull local variables from nextToken and tokenizer into class level.
+[33mbbaad9a[m implement nextToken in Tokenizer2 and test it.
+[33mecbb671[m PredictTable equals method works but had to deactive guard against null values in table.
+[33md01d79c[m PredictTable equals implemented need testing.
+[33mb413d73[m predictTable toString
+[33mcef3ea2[m TODO array copying in PredictTable
+[33m863fede[m TODO: initPredictTable
+[33mebb3370[m TODO: complete PredictTable.java
+[33me516083[m TODO: test PredictTable.java with test.java
+[33m0f3285b[m TODO: test PredictTable.java
+[33m740bd6a[m TODO: create PredictTable code, define terminals in Parser() constructor, connect Lexer to Parser especially for stack obj
+[33m0c7d78a[m Added Pascal EBNF and Parser.java
+[33m4942e41[m Ready to go!
+[33me42d0a4[m Print off
+[33m53ea850[m DONE FOR FIRST DELIVERY
+[33mb6f7a18[m TODO: create bad source file and catch undeclared non keywords
+[33m9f4fa84[m decided to put .gitignore
+[33m0308c4a[m Merge branch 'master' of https://github.com/monilitocastro/PascalCompiler :o S s
+[33mcdc6aa8[m First Commit
+[33m04a3962[m Initial commit

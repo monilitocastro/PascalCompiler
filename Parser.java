@@ -82,16 +82,19 @@ public class Parser{
     if(emitterCommand.equals("@DOTDATA")){
      icg.dotData();
      listOfProc = new ArrayList<String>();
+    }else if(emitterCommand.equals("@ARRAY_VAR") ){
+      
+      //icg.incrementT0Word();
+    }else if(emitterCommand.equals("@STORE_ARRAY") ){
+      icg.arrayStore();
     }else if(emitterCommand.equals("@MARKLHSVAR") ){
       latestArrayVar = tokenElement.regex;
     }else if(emitterCommand.equals("@ARRAY_ASSIGN") ){
       int tokenArrIndex = Integer.parseInt(tokenElement.regex.trim() );
       //System.out.println("****************"+ latestArrayVar);
-      strIndex = tokenElement.regex;
-      arrIndex = Integer.parseInt(strIndex);
-      String arrayMemAddr = getArrayFromSymbolTable(latestArrayVar, tokenArrIndex);
-      icg.loadVariableArray(latestID, arrayMemAddr, strIndex );
-      System.out.println("****************"+latestID +"******"+tokenElement.regex);
+      String arrayMemAddr = getArrayFromSymbolTable(latestArrayVar);
+      icg.loadVariableArray(arrayMemAddr);
+      //System.out.println("****************"+latestID +"******"+tokenElement.regex);
       blassignmentHasArray = true;
     }else if(emitterCommand.equals("@IF_EXPRESSION") ){
       condStack.push(icg.compare(brComp));
@@ -101,12 +104,12 @@ public class Parser{
      for(Object item: list){
       Iterator<SymbolAttributes> itSa = symbolTable.get((String)item).iterator();
       while(itSa.hasNext() ){
-      	SymbolAttributes sa = itSa.next();
-      	if(sa.tokenType.equals("INTEGER_ARRAY_ID") | sa.tokenType.equals("CHAR_ARRAY_ID") ){
-      	      sa.rbound = Integer.parseInt(rBound);
-      		sa.lbound = Integer.parseInt(lBound);
-      		icg.dataArray(sa);
-      	}
+       SymbolAttributes sa = itSa.next();
+       if(sa.tokenType.equals("INTEGER_ARRAY_ID") | sa.tokenType.equals("CHAR_ARRAY_ID") ){
+             sa.rbound = Integer.parseInt(rBound);
+        sa.lbound = Integer.parseInt(lBound);
+        icg.dataArray(sa);
+       }
       }
      }
      listOfVar = new ArrayList<String>();
@@ -188,12 +191,9 @@ public class Parser{
     }else if(emitterCommand.equals("@SUBTRACT")){
      icg.subtract();
     }else if(emitterCommand.equals("@STORE")){
-     if(!blassignmentHasArray){
-      icg.storeByte(latestLHSVar);
-     }else{
-      icg.storeArray(latestID, strIndex);
-      blassignmentHasArray = false;
-     }
+
+    icg.storeByte(latestLHSVar);
+
     }else if(emitterCommand.equals("@LPAREN")){
      icg.pushByte();
     }else if(emitterCommand.equals("@RPAREN")){
@@ -337,6 +337,24 @@ public class Parser{
             System.exit(0);
       }
       System.out.println("Fatal Error: index at " + tokenArrIndex + " for '" + latestID + "' is out of range. Must be between " + salbound +" and "+ sarbound);
+      return null;
+}
+ 
+  /**
+ *
+ * This methods get a unique array id from symbol table. Picks first one.
+ *
+ */
+ private String getArrayFromSymbolTable(String latestID){
+ //System.out.println("****"+latestID);
+      Iterator<SymbolAttributes> itSa = (symbolTable.get(latestID)).iterator();
+      while(itSa.hasNext() ){
+            SymbolAttributes sa = itSa.next();
+            if(sa.optionalImage.equals(latestID) ){
+                  return sa.memAddress;
+            }
+      }
+      System.out.println("Fatal Error: There is no token named '"+latestID+"'.\n");
       return null;
 }
 

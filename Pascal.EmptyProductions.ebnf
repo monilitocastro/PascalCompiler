@@ -53,3 +53,5 @@
 <adding_operator_atom>,<THEN>
 <procedure_declaration_part>,<PERIOD>
 <statement_part>,<PERIOD>
+<mult_operator_atom>,<RBRACK>
+<adding_operator_atom>,<RBRACK>
