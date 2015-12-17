@@ -1,0 +1,934 @@
+stack pop:                           <program>      <PROGRAM>
+stack push:                               @EXIT        program
+stack push:                            <PERIOD>        program
+stack push:                             <block>        program
+stack push:                         <SEMICOLON>        program
+stack push:                            @DOTDATA        program
+stack push:                                <ID>        program
+stack push:                           <PROGRAM>        program
+stack pop:                           <PROGRAM>      <PROGRAM>
+stack pop:                                <ID>           <ID>
+**************@DOTDATA************
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                             <block>          <VAR>
+stack push:                    <statement_part>            Var
+stack push:        <procedure_declaration_part>            Var
+stack push:         <variable_declaration_part>            Var
+stack pop:         <variable_declaration_part>          <VAR>
+stack push:                     <var_decl_atom>            Var
+stack push:                               <VAR>            Var
+stack pop:                               <VAR>          <VAR>
+stack pop:                     <var_decl_atom>           <ID>
+stack push:                     <var_decl_atom>              a
+stack push:                         <SEMICOLON>              a
+stack push:              <variable_declaration>              a
+stack pop:              <variable_declaration>           <ID>
+stack push:                              <type>              a
+stack push:                             <COLON>              a
+stack push:                     <id_comma_atom>              a
+stack push:                         @VARDECLARE              a
+stack push:                                <ID>              a
+stack pop:                                <ID>           <ID>
+**************@VARDECLARE************
+stack pop:                     <id_comma_atom>        <COMMA>
+stack push:                     <id_comma_atom>              ,
+stack push:                         @VARDECLARE              ,
+stack push:                                <ID>              ,
+stack push:                             <COMMA>              ,
+stack pop:                             <COMMA>        <COMMA>
+stack pop:                                <ID>           <ID>
+**************@VARDECLARE************
+stack pop:                     <id_comma_atom>        <COMMA>
+stack push:                     <id_comma_atom>              ,
+stack push:                         @VARDECLARE              ,
+stack push:                                <ID>              ,
+stack push:                             <COMMA>              ,
+stack pop:                             <COMMA>        <COMMA>
+stack pop:                                <ID>           <ID>
+**************@VARDECLARE************
+stack pop:                     <id_comma_atom>        <COMMA>
+stack push:                     <id_comma_atom>              ,
+stack push:                         @VARDECLARE              ,
+stack push:                                <ID>              ,
+stack push:                             <COMMA>              ,
+stack pop:                             <COMMA>        <COMMA>
+stack pop:                                <ID>           <ID>
+**************@VARDECLARE************
+stack pop:                     <id_comma_atom>        <COLON>
+stack push:                             <empty>              :
+Stack pop:                                   <empty>
+stack pop:                             <COLON>        <COLON>
+stack pop:                              <type>      <INTEGER>
+stack push:                       <simple_type>        Integer
+stack pop:                       <simple_type>      <INTEGER>
+stack push:                         @INTDECLARE        Integer
+stack push:                           <INTEGER>        Integer
+stack pop:                           <INTEGER>      <INTEGER>
+**************@INTDECLARE************
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                     <var_decl_atom>    <PROCEDURE>
+stack push:                             <empty>      procedure
+Stack pop:                                   <empty>
+stack pop:        <procedure_declaration_part>    <PROCEDURE>
+stack push:        <procedure_declaration_part>      procedure
+stack push:                         <SEMICOLON>      procedure
+stack push:             <procedure_declaration>      procedure
+stack pop:             <procedure_declaration>    <PROCEDURE>
+stack push:                             <block>      procedure
+stack push:                         <SEMICOLON>      procedure
+stack push:              @PROCEDURE_ID_DECLARED      procedure
+stack push:                                <ID>      procedure
+stack push:                         <PROCEDURE>      procedure
+stack pop:                         <PROCEDURE>    <PROCEDURE>
+stack pop:                                <ID>           <ID>
+**************@PROCEDURE_ID_DECLARED************
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                             <block>        <BEGIN>
+stack push:                    <statement_part>          Begin
+stack pop:                    <statement_part>        <BEGIN>
+stack push:                <compound_statement>          Begin
+stack push:                            @DOTTEXT          Begin
+**************@DOTTEXT************
+stack pop:                <compound_statement>        <BEGIN>
+stack push:                  @NOT_IN_SUBROUTINE          Begin
+stack push:                               <END>          Begin
+stack push:          <semicolon_statement_atom>          Begin
+stack push:                         <statement>          Begin
+stack push:                             <BEGIN>          Begin
+stack pop:                             <BEGIN>        <BEGIN>
+stack pop:                         <statement>           <ID>
+stack push:                  <simple_statement>              c
+stack pop:                  <simple_statement>           <ID>
+stack push:              <assignment_statement>              c
+stack pop:              <assignment_statement>           <ID>
+stack push:             <assignment_statement2>              c
+stack push:                          <variable>              c
+stack push:                         @MARKLHSVAR              c
+**************@MARKLHSVAR************
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              c
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              c
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              c
+stack pop:                                <ID>           <ID>
+stack pop:             <assignment_statement2>       <ASSIGN>
+stack push:                              @STORE             :=
+stack push:            <simple_expression_atom>             :=
+stack push:                 <simple_expression>             :=
+stack push:                            <ASSIGN>             :=
+stack push:                        @LHSVARIABLE             :=
+**************@LHSVARIABLE************
+stack pop:                            <ASSIGN>       <ASSIGN>
+stack pop:                 <simple_expression>           <ID>
+stack push:              <adding_operator_atom>              a
+stack push:                              <term>              a
+stack pop:                              <term>           <ID>
+stack push:                <mult_operator_atom>              a
+stack push:                            <factor>              a
+stack pop:                            <factor>           <ID>
+stack push:                           @VARIABLE              a
+stack push:                          <variable>              a
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              a
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              a
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              a
+stack pop:                                <ID>           <ID>
+**************@VARIABLE************
+stack pop:                <mult_operator_atom>       <ADD_OP>
+stack push:                             <empty>              +
+Stack pop:                                   <empty>
+stack pop:              <adding_operator_atom>       <ADD_OP>
+stack push:              <adding_operator_atom>              +
+stack push:                                @ADD              +
+stack push:                              <term>              +
+stack push:                   <adding_operator>              +
+stack pop:                   <adding_operator>       <ADD_OP>
+stack push:                            <ADD_OP>              +
+stack pop:                            <ADD_OP>       <ADD_OP>
+stack pop:                              <term>           <ID>
+stack push:                <mult_operator_atom>              b
+stack push:                            <factor>              b
+stack pop:                            <factor>           <ID>
+stack push:                           @VARIABLE              b
+stack push:                          <variable>              b
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              b
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              b
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              b
+stack pop:                                <ID>           <ID>
+**************@VARIABLE************
+stack pop:                <mult_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+**************@ADD************
+stack pop:              <adding_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:            <simple_expression_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+**************@STORE************
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>           <ID>
+stack push:                  <simple_statement>              a
+stack pop:                  <simple_statement>           <ID>
+stack push:              <assignment_statement>              a
+stack pop:              <assignment_statement>           <ID>
+stack push:             <assignment_statement2>              a
+stack push:                          <variable>              a
+stack push:                         @MARKLHSVAR              a
+**************@MARKLHSVAR************
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              a
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              a
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              a
+stack pop:                                <ID>           <ID>
+stack pop:             <assignment_statement2>       <ASSIGN>
+stack push:                              @STORE             :=
+stack push:            <simple_expression_atom>             :=
+stack push:                 <simple_expression>             :=
+stack push:                            <ASSIGN>             :=
+stack push:                        @LHSVARIABLE             :=
+**************@LHSVARIABLE************
+stack pop:                            <ASSIGN>       <ASSIGN>
+stack pop:                 <simple_expression>           <ID>
+stack push:              <adding_operator_atom>              b
+stack push:                              <term>              b
+stack pop:                              <term>           <ID>
+stack push:                <mult_operator_atom>              b
+stack push:                            <factor>              b
+stack pop:                            <factor>           <ID>
+stack push:                           @VARIABLE              b
+stack push:                          <variable>              b
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              b
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              b
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              b
+stack pop:                                <ID>           <ID>
+**************@VARIABLE************
+stack pop:                <mult_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:              <adding_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:            <simple_expression_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+**************@STORE************
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>           <ID>
+stack push:                  <simple_statement>              b
+stack pop:                  <simple_statement>           <ID>
+stack push:              <assignment_statement>              b
+stack pop:              <assignment_statement>           <ID>
+stack push:             <assignment_statement2>              b
+stack push:                          <variable>              b
+stack push:                         @MARKLHSVAR              b
+**************@MARKLHSVAR************
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              b
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              b
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              b
+stack pop:                                <ID>           <ID>
+stack pop:             <assignment_statement2>       <ASSIGN>
+stack push:                              @STORE             :=
+stack push:            <simple_expression_atom>             :=
+stack push:                 <simple_expression>             :=
+stack push:                            <ASSIGN>             :=
+stack push:                        @LHSVARIABLE             :=
+**************@LHSVARIABLE************
+stack pop:                            <ASSIGN>       <ASSIGN>
+stack pop:                 <simple_expression>           <ID>
+stack push:              <adding_operator_atom>              c
+stack push:                              <term>              c
+stack pop:                              <term>           <ID>
+stack push:                <mult_operator_atom>              c
+stack push:                            <factor>              c
+stack pop:                            <factor>           <ID>
+stack push:                           @VARIABLE              c
+stack push:                          <variable>              c
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              c
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              c
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              c
+stack pop:                                <ID>           <ID>
+**************@VARIABLE************
+stack pop:                <mult_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:              <adding_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:            <simple_expression_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+**************@STORE************
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>        <WRITE>
+stack push:                  <simple_statement>          Write
+stack pop:                  <simple_statement>        <WRITE>
+stack push:                   <write_statement>          Write
+stack pop:                   <write_statement>        <WRITE>
+stack push:                            <RPAREN>          Write
+stack push:              <write_statement_atom>          Write
+stack push:                              @WRITE          Write
+stack push:                          @DATAQUOTE          Write
+stack push:                          <QUOTESTR>          Write
+stack push:                            <LPAREN>          Write
+stack push:                             <WRITE>          Write
+stack pop:                             <WRITE>        <WRITE>
+stack pop:                            <LPAREN>       <LPAREN>
+stack pop:                          <QUOTESTR>     <QUOTESTR>
+**************@DATAQUOTE************
+**************@WRITE************
+stack pop:              <write_statement_atom>        <COMMA>
+stack push:              <write_statement_atom>              ,
+stack push:                      <output_value>              ,
+stack push:                             <COMMA>              ,
+stack pop:                             <COMMA>        <COMMA>
+stack pop:                      <output_value>           <ID>
+stack push:                           @WRITEINT              c
+stack push:                          <variable>              c
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              c
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              c
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              c
+stack pop:                                <ID>           <ID>
+**************@WRITEINT************
+stack pop:              <write_statement_atom>       <RPAREN>
+stack push:                             <empty>              )
+Stack pop:                                   <empty>
+stack pop:                            <RPAREN>       <RPAREN>
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>           <ID>
+stack push:                  <simple_statement>          order
+stack pop:                  <simple_statement>           <ID>
+stack push:              <assignment_statement>          order
+stack pop:              <assignment_statement>           <ID>
+stack push:             <assignment_statement2>          order
+stack push:                          <variable>          order
+stack push:                         @MARKLHSVAR          order
+**************@MARKLHSVAR************
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>          order
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>          order
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>          order
+stack pop:                                <ID>           <ID>
+stack pop:             <assignment_statement2>       <ASSIGN>
+stack push:                              @STORE             :=
+stack push:            <simple_expression_atom>             :=
+stack push:                 <simple_expression>             :=
+stack push:                            <ASSIGN>             :=
+stack push:                        @LHSVARIABLE             :=
+**************@LHSVARIABLE************
+stack pop:                            <ASSIGN>       <ASSIGN>
+stack pop:                 <simple_expression>           <ID>
+stack push:              <adding_operator_atom>          order
+stack push:                              <term>          order
+stack pop:                              <term>           <ID>
+stack push:                <mult_operator_atom>          order
+stack push:                            <factor>          order
+stack pop:                            <factor>           <ID>
+stack push:                           @VARIABLE          order
+stack push:                          <variable>          order
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>          order
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>          order
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>          order
+stack pop:                                <ID>           <ID>
+**************@VARIABLE************
+stack pop:                <mult_operator_atom>  <SUBTRACT_OP>
+stack push:                             <empty>              -
+Stack pop:                                   <empty>
+stack pop:              <adding_operator_atom>  <SUBTRACT_OP>
+stack push:              <adding_operator_atom>              -
+stack push:                           @SUBTRACT              -
+stack push:                              <term>              -
+stack push:                   <adding_operator>              -
+stack pop:                   <adding_operator>  <SUBTRACT_OP>
+stack push:                       <SUBTRACT_OP>              -
+stack pop:                       <SUBTRACT_OP>  <SUBTRACT_OP>
+stack pop:                              <term>       <NUMBER>
+stack push:                <mult_operator_atom>              1
+stack push:                            <factor>              1
+stack pop:                            <factor>       <NUMBER>
+stack push:                          <constant>              1
+stack pop:                          <constant>       <NUMBER>
+stack push:                     @CONSTANTNUMBER              1
+stack push:                            <NUMBER>              1
+stack pop:                            <NUMBER>       <NUMBER>
+**************@CONSTANTNUMBER************
+stack pop:                <mult_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+**************@SUBTRACT************
+stack pop:              <adding_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:            <simple_expression_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+**************@STORE************
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>           <IF>
+stack push:              <structured_statement>             if
+stack pop:              <structured_statement>           <IF>
+stack push:                      <if_statement>             if
+stack pop:                      <if_statement>           <IF>
+stack push:                              @NOTIF             if
+stack push:                         <statement>             if
+stack push:                              <THEN>             if
+stack push:                      @IF_EXPRESSION             if
+stack push:                 <simple_expression>             if
+stack push:                            <LPAREN>             if
+stack push:                                <IF>             if
+stack pop:                                <IF>           <IF>
+stack pop:                            <LPAREN>       <LPAREN>
+stack pop:                 <simple_expression>           <ID>
+stack push:              <adding_operator_atom>          order
+stack push:                              <term>          order
+stack pop:                              <term>           <ID>
+stack push:                <mult_operator_atom>          order
+stack push:                            <factor>          order
+stack pop:                            <factor>           <ID>
+stack push:                           @VARIABLE          order
+stack push:                          <variable>          order
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>          order
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>          order
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>          order
+stack pop:                                <ID>           <ID>
+**************@VARIABLE************
+stack pop:                <mult_operator_atom>      <GREATER>
+stack push:                            <RPAREN>              >
+stack push:                               @FL_G              >
+stack push:                     @CONSTANTNUMBER              >
+stack push:                            <NUMBER>              >
+stack push:                           <GREATER>              >
+stack pop:                           <GREATER>      <GREATER>
+stack pop:                            <NUMBER>       <NUMBER>
+**************@CONSTANTNUMBER************
+**************@FL_G************
+stack pop:                            <RPAREN>       <RPAREN>
+stack pop:              <adding_operator_atom>         <THEN>
+stack push:                             <empty>           then
+Stack pop:                                   <empty>
+**************@IF_EXPRESSION************
+stack pop:                              <THEN>         <THEN>
+stack pop:                         <statement>         <CALL>
+stack push:                  <simple_statement>           call
+stack pop:                  <simple_statement>         <CALL>
+stack push:               <procedure_statement>           call
+stack pop:               <procedure_statement>         <CALL>
+stack push:                               @CALL           call
+stack push:                                <ID>           call
+stack push:                              <CALL>           call
+stack pop:                              <CALL>         <CALL>
+stack pop:                                <ID>           <ID>
+**************@CALL************
+**************@NOTIF************
+stack pop:          <semicolon_statement_atom>          <END>
+stack push:                             <empty>            End
+Stack pop:                                   <empty>
+stack pop:                               <END>          <END>
+**************@NOT_IN_SUBROUTINE************
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:        <procedure_declaration_part>        <BEGIN>
+stack push:                             <empty>          Begin
+Stack pop:                                   <empty>
+stack pop:                    <statement_part>        <BEGIN>
+stack push:                <compound_statement>          Begin
+stack push:                            @DOTTEXT          Begin
+**************@DOTTEXT************
+stack pop:                <compound_statement>        <BEGIN>
+stack push:                  @NOT_IN_SUBROUTINE          Begin
+stack push:                               <END>          Begin
+stack push:          <semicolon_statement_atom>          Begin
+stack push:                         <statement>          Begin
+stack push:                             <BEGIN>          Begin
+stack pop:                             <BEGIN>        <BEGIN>
+stack pop:                         <statement>        <WRITE>
+stack push:                  <simple_statement>          Write
+stack pop:                  <simple_statement>        <WRITE>
+stack push:                   <write_statement>          Write
+stack pop:                   <write_statement>        <WRITE>
+stack push:                            <RPAREN>          Write
+stack push:              <write_statement_atom>          Write
+stack push:                              @WRITE          Write
+stack push:                          @DATAQUOTE          Write
+stack push:                          <QUOTESTR>          Write
+stack push:                            <LPAREN>          Write
+stack push:                             <WRITE>          Write
+stack pop:                             <WRITE>        <WRITE>
+stack pop:                            <LPAREN>       <LPAREN>
+stack pop:                          <QUOTESTR>     <QUOTESTR>
+**************@DATAQUOTE************
+**************@WRITE************
+stack pop:              <write_statement_atom>       <RPAREN>
+stack push:                             <empty>              )
+Stack pop:                                   <empty>
+stack pop:                            <RPAREN>       <RPAREN>
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>         <READ>
+stack push:                  <simple_statement>           Read
+stack pop:                  <simple_statement>         <READ>
+stack push:                    <read_statement>           Read
+stack pop:                    <read_statement>         <READ>
+stack push:                            <RPAREN>           Read
+stack push:                               @READ           Read
+stack push:                    <input_variable>           Read
+stack push:                            <LPAREN>           Read
+stack push:                              <READ>           Read
+stack pop:                              <READ>         <READ>
+stack pop:                            <LPAREN>       <LPAREN>
+stack pop:                    <input_variable>           <ID>
+stack push:                          <variable>          order
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>          order
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>          order
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>          order
+stack pop:                                <ID>           <ID>
+**************@READ************
+stack pop:                            <RPAREN>       <RPAREN>
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>        <WRITE>
+stack push:                  <simple_statement>          Write
+stack pop:                  <simple_statement>        <WRITE>
+stack push:                   <write_statement>          Write
+stack pop:                   <write_statement>        <WRITE>
+stack push:                            <RPAREN>          Write
+stack push:              <write_statement_atom>          Write
+stack push:                              @WRITE          Write
+stack push:                          @DATAQUOTE          Write
+stack push:                          <QUOTESTR>          Write
+stack push:                            <LPAREN>          Write
+stack push:                             <WRITE>          Write
+stack pop:                             <WRITE>        <WRITE>
+stack pop:                            <LPAREN>       <LPAREN>
+stack pop:                          <QUOTESTR>     <QUOTESTR>
+**************@DATAQUOTE************
+**************@WRITE************
+stack pop:              <write_statement_atom>       <RPAREN>
+stack push:                             <empty>              )
+Stack pop:                                   <empty>
+stack pop:                            <RPAREN>       <RPAREN>
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>           <ID>
+stack push:                  <simple_statement>          order
+stack pop:                  <simple_statement>           <ID>
+stack push:              <assignment_statement>          order
+stack pop:              <assignment_statement>           <ID>
+stack push:             <assignment_statement2>          order
+stack push:                          <variable>          order
+stack push:                         @MARKLHSVAR          order
+**************@MARKLHSVAR************
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>          order
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>          order
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>          order
+stack pop:                                <ID>           <ID>
+stack pop:             <assignment_statement2>       <ASSIGN>
+stack push:                              @STORE             :=
+stack push:            <simple_expression_atom>             :=
+stack push:                 <simple_expression>             :=
+stack push:                            <ASSIGN>             :=
+stack push:                        @LHSVARIABLE             :=
+**************@LHSVARIABLE************
+stack pop:                            <ASSIGN>       <ASSIGN>
+stack pop:                 <simple_expression>           <ID>
+stack push:              <adding_operator_atom>          order
+stack push:                              <term>          order
+stack pop:                              <term>           <ID>
+stack push:                <mult_operator_atom>          order
+stack push:                            <factor>          order
+stack pop:                            <factor>           <ID>
+stack push:                           @VARIABLE          order
+stack push:                          <variable>          order
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>          order
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>          order
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>          order
+stack pop:                                <ID>           <ID>
+**************@VARIABLE************
+stack pop:                <mult_operator_atom>  <SUBTRACT_OP>
+stack push:                             <empty>              -
+Stack pop:                                   <empty>
+stack pop:              <adding_operator_atom>  <SUBTRACT_OP>
+stack push:              <adding_operator_atom>              -
+stack push:                           @SUBTRACT              -
+stack push:                              <term>              -
+stack push:                   <adding_operator>              -
+stack pop:                   <adding_operator>  <SUBTRACT_OP>
+stack push:                       <SUBTRACT_OP>              -
+stack pop:                       <SUBTRACT_OP>  <SUBTRACT_OP>
+stack pop:                              <term>       <NUMBER>
+stack push:                <mult_operator_atom>              2
+stack push:                            <factor>              2
+stack pop:                            <factor>       <NUMBER>
+stack push:                          <constant>              2
+stack pop:                          <constant>       <NUMBER>
+stack push:                     @CONSTANTNUMBER              2
+stack push:                            <NUMBER>              2
+stack pop:                            <NUMBER>       <NUMBER>
+**************@CONSTANTNUMBER************
+stack pop:                <mult_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+**************@SUBTRACT************
+stack pop:              <adding_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:            <simple_expression_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+**************@STORE************
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>           <ID>
+stack push:                  <simple_statement>              a
+stack pop:                  <simple_statement>           <ID>
+stack push:              <assignment_statement>              a
+stack pop:              <assignment_statement>           <ID>
+stack push:             <assignment_statement2>              a
+stack push:                          <variable>              a
+stack push:                         @MARKLHSVAR              a
+**************@MARKLHSVAR************
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              a
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              a
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              a
+stack pop:                                <ID>           <ID>
+stack pop:             <assignment_statement2>       <ASSIGN>
+stack push:                              @STORE             :=
+stack push:            <simple_expression_atom>             :=
+stack push:                 <simple_expression>             :=
+stack push:                            <ASSIGN>             :=
+stack push:                        @LHSVARIABLE             :=
+**************@LHSVARIABLE************
+stack pop:                            <ASSIGN>       <ASSIGN>
+stack pop:                 <simple_expression>       <NUMBER>
+stack push:              <adding_operator_atom>              1
+stack push:                              <term>              1
+stack pop:                              <term>       <NUMBER>
+stack push:                <mult_operator_atom>              1
+stack push:                            <factor>              1
+stack pop:                            <factor>       <NUMBER>
+stack push:                          <constant>              1
+stack pop:                          <constant>       <NUMBER>
+stack push:                     @CONSTANTNUMBER              1
+stack push:                            <NUMBER>              1
+stack pop:                            <NUMBER>       <NUMBER>
+**************@CONSTANTNUMBER************
+stack pop:                <mult_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:              <adding_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:            <simple_expression_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+**************@STORE************
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>           <ID>
+stack push:                  <simple_statement>              b
+stack pop:                  <simple_statement>           <ID>
+stack push:              <assignment_statement>              b
+stack pop:              <assignment_statement>           <ID>
+stack push:             <assignment_statement2>              b
+stack push:                          <variable>              b
+stack push:                         @MARKLHSVAR              b
+**************@MARKLHSVAR************
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              b
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              b
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              b
+stack pop:                                <ID>           <ID>
+stack pop:             <assignment_statement2>       <ASSIGN>
+stack push:                              @STORE             :=
+stack push:            <simple_expression_atom>             :=
+stack push:                 <simple_expression>             :=
+stack push:                            <ASSIGN>             :=
+stack push:                        @LHSVARIABLE             :=
+**************@LHSVARIABLE************
+stack pop:                            <ASSIGN>       <ASSIGN>
+stack pop:                 <simple_expression>       <NUMBER>
+stack push:              <adding_operator_atom>              1
+stack push:                              <term>              1
+stack pop:                              <term>       <NUMBER>
+stack push:                <mult_operator_atom>              1
+stack push:                            <factor>              1
+stack pop:                            <factor>       <NUMBER>
+stack push:                          <constant>              1
+stack pop:                          <constant>       <NUMBER>
+stack push:                     @CONSTANTNUMBER              1
+stack push:                            <NUMBER>              1
+stack pop:                            <NUMBER>       <NUMBER>
+**************@CONSTANTNUMBER************
+stack pop:                <mult_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:              <adding_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:            <simple_expression_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+**************@STORE************
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>           <ID>
+stack push:                  <simple_statement>              c
+stack pop:                  <simple_statement>           <ID>
+stack push:              <assignment_statement>              c
+stack pop:              <assignment_statement>           <ID>
+stack push:             <assignment_statement2>              c
+stack push:                          <variable>              c
+stack push:                         @MARKLHSVAR              c
+**************@MARKLHSVAR************
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              c
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              c
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              c
+stack pop:                                <ID>           <ID>
+stack pop:             <assignment_statement2>       <ASSIGN>
+stack push:                              @STORE             :=
+stack push:            <simple_expression_atom>             :=
+stack push:                 <simple_expression>             :=
+stack push:                            <ASSIGN>             :=
+stack push:                        @LHSVARIABLE             :=
+**************@LHSVARIABLE************
+stack pop:                            <ASSIGN>       <ASSIGN>
+stack pop:                 <simple_expression>       <NUMBER>
+stack push:              <adding_operator_atom>              1
+stack push:                              <term>              1
+stack pop:                              <term>       <NUMBER>
+stack push:                <mult_operator_atom>              1
+stack push:                            <factor>              1
+stack pop:                            <factor>       <NUMBER>
+stack push:                          <constant>              1
+stack pop:                          <constant>       <NUMBER>
+stack push:                     @CONSTANTNUMBER              1
+stack push:                            <NUMBER>              1
+stack pop:                            <NUMBER>       <NUMBER>
+**************@CONSTANTNUMBER************
+stack pop:                <mult_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:              <adding_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:            <simple_expression_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+**************@STORE************
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>        <WRITE>
+stack push:                  <simple_statement>          Write
+stack pop:                  <simple_statement>        <WRITE>
+stack push:                   <write_statement>          Write
+stack pop:                   <write_statement>        <WRITE>
+stack push:                            <RPAREN>          Write
+stack push:              <write_statement_atom>          Write
+stack push:                              @WRITE          Write
+stack push:                          @DATAQUOTE          Write
+stack push:                          <QUOTESTR>          Write
+stack push:                            <LPAREN>          Write
+stack push:                             <WRITE>          Write
+stack pop:                             <WRITE>        <WRITE>
+stack pop:                            <LPAREN>       <LPAREN>
+stack pop:                          <QUOTESTR>     <QUOTESTR>
+**************@DATAQUOTE************
+**************@WRITE************
+stack pop:              <write_statement_atom>        <COMMA>
+stack push:              <write_statement_atom>              ,
+stack push:                      <output_value>              ,
+stack push:                             <COMMA>              ,
+stack pop:                             <COMMA>        <COMMA>
+stack pop:                      <output_value>           <ID>
+stack push:                           @WRITEINT              a
+stack push:                          <variable>              a
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              a
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              a
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              a
+stack pop:                                <ID>           <ID>
+**************@WRITEINT************
+stack pop:              <write_statement_atom>       <RPAREN>
+stack push:                             <empty>              )
+Stack pop:                                   <empty>
+stack pop:                            <RPAREN>       <RPAREN>
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>        <WRITE>
+stack push:                  <simple_statement>          Write
+stack pop:                  <simple_statement>        <WRITE>
+stack push:                   <write_statement>          Write
+stack pop:                   <write_statement>        <WRITE>
+stack push:                            <RPAREN>          Write
+stack push:              <write_statement_atom>          Write
+stack push:                              @WRITE          Write
+stack push:                          @DATAQUOTE          Write
+stack push:                          <QUOTESTR>          Write
+stack push:                            <LPAREN>          Write
+stack push:                             <WRITE>          Write
+stack pop:                             <WRITE>        <WRITE>
+stack pop:                            <LPAREN>       <LPAREN>
+stack pop:                          <QUOTESTR>     <QUOTESTR>
+**************@DATAQUOTE************
+**************@WRITE************
+stack pop:              <write_statement_atom>        <COMMA>
+stack push:              <write_statement_atom>              ,
+stack push:                      <output_value>              ,
+stack push:                             <COMMA>              ,
+stack pop:                             <COMMA>        <COMMA>
+stack pop:                      <output_value>           <ID>
+stack push:                           @WRITEINT              b
+stack push:                          <variable>              b
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              b
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              b
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              b
+stack pop:                                <ID>           <ID>
+**************@WRITEINT************
+stack pop:              <write_statement_atom>       <RPAREN>
+stack push:                             <empty>              )
+Stack pop:                                   <empty>
+stack pop:                            <RPAREN>       <RPAREN>
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>         <CALL>
+stack push:                  <simple_statement>           call
+stack pop:                  <simple_statement>         <CALL>
+stack push:               <procedure_statement>           call
+stack pop:               <procedure_statement>         <CALL>
+stack push:                               @CALL           call
+stack push:                                <ID>           call
+stack push:                              <CALL>           call
+stack pop:                              <CALL>         <CALL>
+stack pop:                                <ID>           <ID>
+**************@CALL************
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>        <WRITE>
+stack push:                  <simple_statement>          Write
+stack pop:                  <simple_statement>        <WRITE>
+stack push:                   <write_statement>          Write
+stack pop:                   <write_statement>        <WRITE>
+stack push:                            <RPAREN>          Write
+stack push:              <write_statement_atom>          Write
+stack push:                              @WRITE          Write
+stack push:                          @DATAQUOTE          Write
+stack push:                          <QUOTESTR>          Write
+stack push:                            <LPAREN>          Write
+stack push:                             <WRITE>          Write
+stack pop:                             <WRITE>        <WRITE>
+stack pop:                            <LPAREN>       <LPAREN>
+stack pop:                          <QUOTESTR>     <QUOTESTR>
+**************@DATAQUOTE************
+**************@WRITE************
+stack pop:              <write_statement_atom>       <RPAREN>
+stack push:                             <empty>              )
+Stack pop:                                   <empty>
+stack pop:                            <RPAREN>       <RPAREN>
+stack pop:          <semicolon_statement_atom>          <END>
+stack push:                             <empty>            End
+Stack pop:                                   <empty>
+stack pop:                               <END>          <END>
+**************@NOT_IN_SUBROUTINE************
+stack pop:                            <PERIOD>       <PERIOD>
+**************@EXIT************
+stack pop:                                   $              $

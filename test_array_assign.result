@@ -1,0 +1,5 @@
+MARS 4.5  Copyright 2003-2014 Pete Sanderson and Kenneth Vollmar
+
+Error in /home/mcastro/PascalCompiler/test_array_assign.asm line 8 column 3: Symbol "start" not found in symbol table.
+
+Processing terminated due to errors.

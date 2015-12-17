@@ -100,6 +100,10 @@ public class Tokenizer2 {
     if(currBiggestPattern.token.equals("<COMMENT>") ){
       return nextToken();
     }
+    if(currBiggestPattern.token.equals("<ILLEGAL>") ){
+      System.out.println("Fatal Error: Illegal character found.");
+      System.exit(0);
+    }
     //System.out.println("curr: "+);
     elemToAdd = new TokenListElement(image, currBiggestPattern.token);
     if(!currBiggestPattern.token.equals("<COMMENT>")){tokenList.add( elemToAdd );}

@@ -1,0 +1,62 @@
+stack pop:                           <program>      <PROGRAM>
+stack push:                               @EXIT        Program
+stack push:                            <PERIOD>        Program
+stack push:                             <block>        Program
+stack push:                         <SEMICOLON>        Program
+stack push:                            @DOTDATA        Program
+stack push:                                <ID>        Program
+stack push:                           <PROGRAM>        Program
+stack pop:                           <PROGRAM>      <PROGRAM>
+stack pop:                                <ID>           <ID>
+**************@DOTDATA************
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                             <block>          <VAR>
+stack push:                    <statement_part>            Var
+stack push:        <procedure_declaration_part>            Var
+stack push:         <variable_declaration_part>            Var
+stack pop:         <variable_declaration_part>          <VAR>
+stack push:                     <var_decl_atom>            Var
+stack push:                               <VAR>            Var
+stack pop:                               <VAR>          <VAR>
+stack pop:                     <var_decl_atom>           <ID>
+stack push:                     <var_decl_atom>              a
+stack push:                         <SEMICOLON>              a
+stack push:              <variable_declaration>              a
+stack pop:              <variable_declaration>           <ID>
+stack push:                              <type>              a
+stack push:                             <COLON>              a
+stack push:                     <id_comma_atom>              a
+stack push:                         @VARDECLARE              a
+stack push:                                <ID>              a
+stack pop:                                <ID>           <ID>
+**************@VARDECLARE************
+stack pop:                     <id_comma_atom>        <COLON>
+stack push:                             <empty>              :
+Stack pop:                                   <empty>
+stack pop:                             <COLON>        <COLON>
+stack pop:                              <type>      <INTEGER>
+stack push:                       <simple_type>        Integer
+stack pop:                       <simple_type>      <INTEGER>
+stack push:                         @INTDECLARE        Integer
+stack push:                           <INTEGER>        Integer
+stack pop:                           <INTEGER>      <INTEGER>
+**************@INTDECLARE************
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                     <var_decl_atom>        <BEGIN>
+stack push:                             <empty>          Begin
+Stack pop:                                   <empty>
+stack pop:        <procedure_declaration_part>        <BEGIN>
+stack push:                             <empty>          Begin
+Stack pop:                                   <empty>
+stack pop:                    <statement_part>        <BEGIN>
+stack push:                <compound_statement>          Begin
+stack push:                            @DOTTEXT          Begin
+**************@DOTTEXT************
+stack pop:                <compound_statement>        <BEGIN>
+stack push:                  @NOT_IN_SUBROUTINE          Begin
+stack push:                               <END>          Begin
+stack push:          <semicolon_statement_atom>          Begin
+stack push:                         <statement>          Begin
+stack push:                             <BEGIN>          Begin
+stack pop:                             <BEGIN>        <BEGIN>
+Fatal Error: Illegal character found.

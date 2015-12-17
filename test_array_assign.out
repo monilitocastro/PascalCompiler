@@ -1,0 +1,278 @@
+stack pop:                           <program>      <PROGRAM>
+stack push:                               @EXIT        Program
+stack push:                            <PERIOD>        Program
+stack push:                             <block>        Program
+stack push:                         <SEMICOLON>        Program
+stack push:                            @DOTDATA        Program
+stack push:                                <ID>        Program
+stack push:                           <PROGRAM>        Program
+stack pop:                           <PROGRAM>      <PROGRAM>
+stack pop:                                <ID>           <ID>
+**************@DOTDATA************
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                             <block>          <VAR>
+stack push:                    <statement_part>            Var
+stack push:        <procedure_declaration_part>            Var
+stack push:         <variable_declaration_part>            Var
+stack pop:         <variable_declaration_part>          <VAR>
+stack push:                     <var_decl_atom>            Var
+stack push:                               <VAR>            Var
+stack pop:                               <VAR>          <VAR>
+stack pop:                     <var_decl_atom>           <ID>
+stack push:                     <var_decl_atom>              a
+stack push:                         <SEMICOLON>              a
+stack push:              <variable_declaration>              a
+stack pop:              <variable_declaration>           <ID>
+stack push:                              <type>              a
+stack push:                             <COLON>              a
+stack push:                     <id_comma_atom>              a
+stack push:                         @VARDECLARE              a
+stack push:                                <ID>              a
+stack pop:                                <ID>           <ID>
+**************@VARDECLARE************
+stack pop:                     <id_comma_atom>        <COLON>
+stack push:                             <empty>              :
+Stack pop:                                   <empty>
+stack pop:                             <COLON>        <COLON>
+stack pop:                              <type>        <ARRAY>
+stack push:                        <array_type>          Array
+stack pop:                        <array_type>        <ARRAY>
+stack push:                       @ARRAYDECLARE          Array
+stack push:                       <simple_type>          Array
+stack push:                                <OF>          Array
+stack push:                            <RBRACK>          Array
+stack push:                       <index_range>          Array
+stack push:                            <LBRACK>          Array
+stack push:                             <ARRAY>          Array
+stack pop:                             <ARRAY>        <ARRAY>
+stack pop:                            <LBRACK>       <LBRACK>
+stack pop:                       <index_range>       <NUMBER>
+stack push:                            <NUMBER>              6
+stack push:                             @RBOUND              6
+stack push:                          <RANGE_OP>              6
+stack push:                            <NUMBER>              6
+stack push:                             @LBOUND              6
+**************@LBOUND************
+stack pop:                            <NUMBER>       <NUMBER>
+stack pop:                          <RANGE_OP>     <RANGE_OP>
+**************@RBOUND************
+stack pop:                            <NUMBER>       <NUMBER>
+stack pop:                            <RBRACK>       <RBRACK>
+stack pop:                                <OF>           <OF>
+stack pop:                       <simple_type>      <INTEGER>
+stack push:                         @INTDECLARE        Integer
+stack push:                           <INTEGER>        Integer
+stack pop:                           <INTEGER>      <INTEGER>
+**************@INTDECLARE************
+**************@ARRAYDECLARE************
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                     <var_decl_atom>          <VAR>
+stack push:                    <statement_part>            Var
+stack push:        <procedure_declaration_part>            Var
+stack push:         <variable_declaration_part>            Var
+stack pop:         <variable_declaration_part>          <VAR>
+stack push:                     <var_decl_atom>            Var
+stack push:                               <VAR>            Var
+stack pop:                               <VAR>          <VAR>
+stack pop:                     <var_decl_atom>           <ID>
+stack push:                     <var_decl_atom>              b
+stack push:                         <SEMICOLON>              b
+stack push:              <variable_declaration>              b
+stack pop:              <variable_declaration>           <ID>
+stack push:                              <type>              b
+stack push:                             <COLON>              b
+stack push:                     <id_comma_atom>              b
+stack push:                         @VARDECLARE              b
+stack push:                                <ID>              b
+stack pop:                                <ID>           <ID>
+**************@VARDECLARE************
+stack pop:                     <id_comma_atom>        <COLON>
+stack push:                             <empty>              :
+Stack pop:                                   <empty>
+stack pop:                             <COLON>        <COLON>
+stack pop:                              <type>        <ARRAY>
+stack push:                        <array_type>          Array
+stack pop:                        <array_type>        <ARRAY>
+stack push:                       @ARRAYDECLARE          Array
+stack push:                       <simple_type>          Array
+stack push:                                <OF>          Array
+stack push:                            <RBRACK>          Array
+stack push:                       <index_range>          Array
+stack push:                            <LBRACK>          Array
+stack push:                             <ARRAY>          Array
+stack pop:                             <ARRAY>        <ARRAY>
+stack pop:                            <LBRACK>       <LBRACK>
+stack pop:                       <index_range>       <NUMBER>
+stack push:                            <NUMBER>              6
+stack push:                             @RBOUND              6
+stack push:                          <RANGE_OP>              6
+stack push:                            <NUMBER>              6
+stack push:                             @LBOUND              6
+**************@LBOUND************
+stack pop:                            <NUMBER>       <NUMBER>
+stack pop:                          <RANGE_OP>     <RANGE_OP>
+**************@RBOUND************
+stack pop:                            <NUMBER>       <NUMBER>
+stack pop:                            <RBRACK>       <RBRACK>
+stack pop:                                <OF>           <OF>
+stack pop:                       <simple_type>      <INTEGER>
+stack push:                         @INTDECLARE        Integer
+stack push:                           <INTEGER>        Integer
+stack pop:                           <INTEGER>      <INTEGER>
+**************@INTDECLARE************
+**************@ARRAYDECLARE************
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                     <var_decl_atom>        <BEGIN>
+stack push:                             <empty>          Begin
+Stack pop:                                   <empty>
+stack pop:        <procedure_declaration_part>        <BEGIN>
+stack push:                             <empty>          Begin
+Stack pop:                                   <empty>
+stack pop:                    <statement_part>        <BEGIN>
+stack push:                <compound_statement>          Begin
+stack push:                            @DOTTEXT          Begin
+**************@DOTTEXT************
+stack pop:                <compound_statement>        <BEGIN>
+stack push:                  @NOT_IN_SUBROUTINE          Begin
+stack push:                               <END>          Begin
+stack push:          <semicolon_statement_atom>          Begin
+stack push:                         <statement>          Begin
+stack push:                             <BEGIN>          Begin
+stack pop:                             <BEGIN>        <BEGIN>
+stack pop:                         <statement>           <ID>
+stack push:                  <simple_statement>              a
+stack pop:                  <simple_statement>           <ID>
+stack push:              <assignment_statement>              a
+stack pop:              <assignment_statement>           <ID>
+stack push:             <assignment_statement2>              a
+stack push:                          <variable>              a
+stack push:                         @MARKLHSVAR              a
+**************@MARKLHSVAR************
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              a
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              a
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              a
+stack pop:                                <ID>           <ID>
+stack pop:             <assignment_statement2>       <LBRACK>
+stack push:                        @STORE_ARRAY              [
+stack push:            <simple_expression_atom>              [
+stack push:                 <simple_expression>              [
+stack push:                            <ASSIGN>              [
+stack push:                        @LHSVARIABLE              [
+stack push:                            <RBRACK>              [
+stack push:                          @ARRAY_VAR              [
+stack push:                 <simple_expression>              [
+stack push:                            <LBRACK>              [
+stack pop:                            <LBRACK>       <LBRACK>
+stack pop:                 <simple_expression>       <NUMBER>
+stack push:              <adding_operator_atom>              7
+stack push:                              <term>              7
+stack pop:                              <term>       <NUMBER>
+stack push:                <mult_operator_atom>              7
+stack push:                            <factor>              7
+stack pop:                            <factor>       <NUMBER>
+stack push:                          <constant>              7
+stack pop:                          <constant>       <NUMBER>
+stack push:                     @CONSTANTNUMBER              7
+stack push:                            <NUMBER>              7
+stack pop:                            <NUMBER>       <NUMBER>
+**************@CONSTANTNUMBER************
+stack pop:                <mult_operator_atom>       <RBRACK>
+stack push:                             <empty>              ]
+Stack pop:                                   <empty>
+stack pop:              <adding_operator_atom>       <RBRACK>
+stack push:                             <empty>              ]
+Stack pop:                                   <empty>
+**************@ARRAY_VAR************
+stack pop:                            <RBRACK>       <RBRACK>
+**************@LHSVARIABLE************
+stack pop:                            <ASSIGN>       <ASSIGN>
+stack pop:                 <simple_expression>       <NUMBER>
+stack push:              <adding_operator_atom>             23
+stack push:                              <term>             23
+stack pop:                              <term>       <NUMBER>
+stack push:                <mult_operator_atom>             23
+stack push:                            <factor>             23
+stack pop:                            <factor>       <NUMBER>
+stack push:                          <constant>             23
+stack pop:                          <constant>       <NUMBER>
+stack push:                     @CONSTANTNUMBER             23
+stack push:                            <NUMBER>             23
+stack pop:                            <NUMBER>       <NUMBER>
+**************@CONSTANTNUMBER************
+stack pop:                <mult_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:              <adding_operator_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+stack pop:            <simple_expression_atom>    <SEMICOLON>
+stack push:                             <empty>              ;
+Stack pop:                                   <empty>
+**************@STORE_ARRAY************
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>        <WRITE>
+stack push:                  <simple_statement>          Write
+stack pop:                  <simple_statement>        <WRITE>
+stack push:                   <write_statement>          Write
+stack pop:                   <write_statement>        <WRITE>
+stack push:                            <RPAREN>          Write
+stack push:              <write_statement_atom>          Write
+stack push:                              @WRITE          Write
+stack push:                          @DATAQUOTE          Write
+stack push:                          <QUOTESTR>          Write
+stack push:                            <LPAREN>          Write
+stack push:                             <WRITE>          Write
+stack pop:                             <WRITE>        <WRITE>
+stack pop:                            <LPAREN>       <LPAREN>
+stack pop:                          <QUOTESTR>     <QUOTESTR>
+**************@DATAQUOTE************
+**************@WRITE************
+stack pop:              <write_statement_atom>        <COMMA>
+stack push:              <write_statement_atom>              ,
+stack push:                      <output_value>              ,
+stack push:                             <COMMA>              ,
+stack pop:                             <COMMA>        <COMMA>
+stack pop:                      <output_value>           <ID>
+stack push:                           @WRITEINT              a
+stack push:                          <variable>              a
+stack pop:                          <variable>           <ID>
+stack push:                   <entire_variable>              a
+stack pop:                   <entire_variable>           <ID>
+stack push:               <variable_identifier>              a
+stack pop:               <variable_identifier>           <ID>
+stack push:                                <ID>              a
+stack pop:                                <ID>           <ID>
+**************@WRITEINT************
+stack pop:              <write_statement_atom>       <RPAREN>
+stack push:                             <empty>              )
+Stack pop:                                   <empty>
+stack pop:                            <RPAREN>       <RPAREN>
+stack pop:          <semicolon_statement_atom>    <SEMICOLON>
+stack push:          <semicolon_statement_atom>              ;
+stack push:                         <statement>              ;
+stack push:                         <SEMICOLON>              ;
+stack pop:                         <SEMICOLON>    <SEMICOLON>
+stack pop:                         <statement>          <END>
+stack push:                             <empty>            End
+Stack pop:                                   <empty>
+stack pop:          <semicolon_statement_atom>          <END>
+stack push:                             <empty>            End
+Stack pop:                                   <empty>
+stack pop:                               <END>          <END>
+**************@NOT_IN_SUBROUTINE************
+stack pop:        <procedure_declaration_part>       <PERIOD>
+stack push:                             <empty>              .
+Stack pop:                                   <empty>
+stack pop:                    <statement_part>       <PERIOD>
+stack push:                             <empty>              .
+Stack pop:                                   <empty>
+stack pop:                            <PERIOD>       <PERIOD>
+**************@EXIT************
+stack pop:                                   $              $

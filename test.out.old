@@ -1,0 +1,62 @@
+mcastro@mcastro-X401A1:~/PascalCompiler$ java Lexer test.pas
+
+***************************************************************
+*                         First Delivery                      *
+***************************************************************
+
+                       TOKENS   IMAGE
+                       ------   -----
+                    <PROGRAM>   Program
+                         <ID>   ReadingWritingTest
+                  <SEMICOLON>   ;
+                        <VAR>   Var
+                         <ID>   a
+                      <COMMA>   ,
+                         <ID>   b
+                      <COMMA>   ,
+                         <ID>   c
+                      <COMMA>   ,
+                         <ID>   ReadingWritingTest
+                      <COLON>   :
+                    <INTEGER>   Integer
+                  <SEMICOLON>   ;
+                        <VAR>   Var
+                         <ID>   ReadingWritingTest
+                      <COLON>   :
+                     <STRING>   String
+                  <SEMICOLON>   ;
+                      <BEGIN>   Begin
+                    <WRITELN>   WriteLn
+                     <LPAREN>   (
+                   <QUOTESTR>   "What is your name?"
+                     <RPAREN>   )
+                  <SEMICOLON>   ;
+                       <READ>   Read
+                         <ID>   a
+                  <SEMICOLON>   ;
+                    <ILLEGAL>   &
+                      <WRITE>   Write
+                     <LPAREN>   (
+                   <QUOTESTR>   "Hello "
+                     <RPAREN>   )
+                  <SEMICOLON>   ;
+                      <WRITE>   Write
+                     <LPAREN>   (
+                         <ID>   a
+                     <RPAREN>   )
+                  <SEMICOLON>   ;
+                    <WRITELN>   WriteLn
+                     <LPAREN>   (
+                   <QUOTESTR>   ". Prepare to learn PASCAL!!"
+                     <RPAREN>   )
+                  <SEMICOLON>   ;
+                     <READLN>   Readln
+                  <SEMICOLON>   ;
+                        <END>   End
+                     <PERIOD>   .
+*********************Symbol table contents*********************
+format: image_of_token = [ list, of, identifiers ]
+{b=[<INTEGER_ID:b>], a=[<INTEGER_ID:a>], c=[<INTEGER_ID:c>], ReadingWritingTest=[<PROGRAM_ID:ReadingWritingTest>, <INTEGER_ID:ReadingWritingTest>, <STRING_ID:ReadingWritingTest>]}
+ERROR: Illegal characters detected.
+
+mcastro@mcastro-X401A1:~/PascalCompiler$ 
