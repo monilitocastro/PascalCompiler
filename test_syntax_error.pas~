@@ -1,0 +1,7 @@
+{* Shows syntax error by revealing undefined transition *}
+Program badTransition;
+  Var m: Char;
+Begin
+  Write("What is your middle initial? ", Read(m) );
+  Write("\nYour Middle initial is ", m);
+End.

@@ -18,6 +18,7 @@ import java.util.Iterator;
 public class Parser{
  private Stack<String> stack;
  private Stack<String> condStack;
+ private Stack<String> loopStack;
  private PredictTable prTable;
  private ArrayList<String> listOfProc = new ArrayList<String>();
  private ArrayList<String> arrTerminals;
@@ -29,6 +30,7 @@ public class Parser{
   icg = i;
   stack = new Stack<String>();
   condStack = new Stack<String>();
+  loopStack = new Stack<String>();
   arrTerminals = new ArrayList<String>();
   prTable = new PredictTable();
   addAllTerminals();
@@ -82,6 +84,9 @@ public class Parser{
     if(emitterCommand.equals("@DOTDATA")){
      icg.dotData();
      listOfProc = new ArrayList<String>();
+    }else if(emitterCommand.equals("@END_LOOP") ){
+    }else if(emitterCommand.equals("@LOOP_INVARIANT") ){
+      //loopStack.push();
     }else if(emitterCommand.equals("@MARKLHSVAR") ){
       latestArrayVar = tokenElement.regex;
     }else if(emitterCommand.equals("@ARRAY_ASSIGN") ){
@@ -101,12 +106,12 @@ public class Parser{
      for(Object item: list){
       Iterator<SymbolAttributes> itSa = symbolTable.get((String)item).iterator();
       while(itSa.hasNext() ){
-      	SymbolAttributes sa = itSa.next();
-      	if(sa.tokenType.equals("INTEGER_ARRAY_ID") | sa.tokenType.equals("CHAR_ARRAY_ID") ){
-      	      sa.rbound = Integer.parseInt(rBound);
-      		sa.lbound = Integer.parseInt(lBound);
-      		icg.dataArray(sa);
-      	}
+       SymbolAttributes sa = itSa.next();
+       if(sa.tokenType.equals("INTEGER_ARRAY_ID") | sa.tokenType.equals("CHAR_ARRAY_ID") ){
+             sa.rbound = Integer.parseInt(rBound);
+        sa.lbound = Integer.parseInt(lBound);
+        icg.dataArray(sa);
+       }
       }
      }
      listOfVar = new ArrayList<String>();

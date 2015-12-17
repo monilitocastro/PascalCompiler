@@ -25,7 +25,7 @@
 <statement>,<WHILE>,<structured_statement>
 <statement>,<IF>,<structured_statement>
 <structured_statement>,<WHILE>,<while_statement>
-<while_statement>,<WHILE>,<WHILE>,<LPAREN>,<simple_expression>,<DO>,<block>
+<while_statement>,<WHILE>,<WHILE>,<LPAREN>,<simple_expression>,@LOOP_INVARIANT,<DO>,<block>,@END_LOOP
 <structured_statement>,<IF>,<if_statement>
 <if_statement>,<IF>,<IF>,<LPAREN>,<simple_expression>,@IF_EXPRESSION,<THEN>,<statement>,@NOTIF
 <simple_statement>,<CALL>,<procedure_statement>
